@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="phone" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="82px" height="82px" viewBox="-9 -1 82 82" style="enable-background:new -9 -1 82 82;" xml:space="preserve">
+<style type="text/css">
+<![CDATA[
+	.st0{fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+]]>
+</style>
+<polyline class="st0" points="34,46 30,42 26,38 "/>
+<path class="st0" d="M36.4,47.7c0.7-0.4,4.2-2.4,4.2-2.4l9.4,4.9L43.8,58c0,0-10.4-1.9-19.1-10.6l-0.1-0.1
+	C15.9,38.6,14,28.2,14,28.2l7.7-6.2l4.9,9.4c0,0-2,3.5-2.4,4.2"/>
+<g>
+	<path class="st0" d="M58.8,10.3C51.7,3.9,42.3,0,32,0C9.9,0-8,17.9-8,40c0,10.3,3.9,19.7,10.3,26.8"/>
+	<path class="st0" d="M5.2,69.7C12.3,76.1,21.7,80,32,80c22.1,0,40-17.9,40-40c0-10.3-3.9-19.7-10.3-26.8"/>
+</g>
+</svg>
