@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>切換容器示例</title>
+  <style>
+    .en {
+      display: block;
+    }
+
+    .jp {
+      display: none;
+    }
+
+    button.selected {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="en">這是容器A - 英文</div>
+  <div class="jp">これはコンテナB - 日本語</div>
+
+  <button id="enButton" class="selected">EN</button>
+  <button id="jpButton">JP</button>
+
+  <script>
+    // 获取EN和JP按钮以及相应的容器元素
+    var enButton = document.getElementById("enButton");
+    var jpButton = document.getElementById("jpButton");
+    var enContainers = document.querySelectorAll(".en");
+    var jpContainers = document.querySelectorAll(".jp");
+
+    // 添加点击事件监听器，以切换容器的显示与隐藏，并添加下划线效果
+    enButton.addEventListener("click", function () {
+      enContainers.forEach(function (container) {
+        container.style.display = "block";
+      });
+      jpContainers.forEach(function (container) {
+        container.style.display = "none";
+      });
+
+      // 添加下划线效果
+      enButton.classList.add("selected");
+      jpButton.classList.remove("selected");
+    });
+
+    jpButton.addEventListener("click", function () {
+      jpContainers.forEach(function (container) {
+        container.style.display = "block";
+      });
+      enContainers.forEach(function (container) {
+        container.style.display = "none";
+      });
+
+      // 添加下划线效果
+      jpButton.classList.add("selected");
+      enButton.classList.remove("selected");
+    });
+
+    // 添加鼠标悬停事件监听器，为可点击的按钮添加指针游标，不可点击的按钮保持默认游标
+    enButton.addEventListener("mouseover", function () {
+      enButton.style.cursor = "pointer";
+    });
+
+    jpButton.addEventListener("mouseover", function () {
+      jpButton.style.cursor = "pointer";
+    });
+
+    enButton.addEventListener("mouseout", function () {
+      enButton.style.cursor = "text";
+    });
+
+    jpButton.addEventListener("mouseout", function () {
+      jpButton.style.cursor = "text";
+    });
+  </script>
+</body>
+
+</html>
