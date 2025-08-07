@@ -25,6 +25,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/index_new2.css">
+  <link rel="stylesheet" href="css/lightbox-loading.css">
   <link rel="stylesheet" href="css/owlcarousel/owl.carousel.css">
   <link rel="stylesheet" href="css/owlcarousel/owl.theme.default.css">
   <style type="text/css">
@@ -1254,6 +1255,9 @@
   <div class="lightbox-close"></div>
   <div class="lightbox-content">
     <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-loading">
+      <div class="loading-spinner"></div>
+    </div>
   </div>
   <div class="lightbox-nav lightbox-prev"></div>
   <div class="lightbox-nav lightbox-next"></div>
@@ -1293,15 +1297,54 @@ $(document).ready(function() {
   
   // 顯示lightbox
   function showLightbox(imageSrc) {
-    $('#lightbox-img').attr('src', imageSrc);
+    var scrollPosition = window.pageYOffset;
     $('#lightbox').addClass('show');
-    $('body').css('overflow', 'hidden'); // 防止背景滾動
+    $('body')
+      .addClass('lightbox-open')
+      .css('padding-right', getScrollbarWidth() + 'px')
+      .css('top', -scrollPosition + 'px');
+    $('body').data('scroll-position', scrollPosition);
+    
+    // 使用圖片切換函數來載入第一張圖片
+    switchImage(imageSrc);
   }
   
   // 隱藏lightbox
   function hideLightbox() {
+    var scrollPosition = $('body').data('scroll-position');
     $('#lightbox').removeClass('show');
-    $('body').css('overflow', ''); // 恢復背景滾動
+    $('.lightbox-loading').removeClass('show'); // 確保loading被隱藏
+    $('body')
+      .removeClass('lightbox-open')
+      .css('padding-right', '')
+      .css('top', '');
+    window.scrollTo(0, scrollPosition);
+  }
+  
+  // 計算scrollbar寬度
+  function getScrollbarWidth() {
+    return window.innerWidth - document.documentElement.clientWidth;
+  }
+  
+  // 切換圖片時顯示loading
+  function switchImage(imageSrc) {
+    // 顯示loading並隱藏當前圖片
+    $('.lightbox-loading').addClass('show');
+    $('#lightbox-img').css('opacity', '0');
+    
+    // 預載新圖片
+    var img = new Image();
+    img.onload = function() {
+      // 圖片已載入，可以進行切換
+      $('#lightbox-img').attr('src', imageSrc);
+      
+      // 確保DOM更新後再進行顯示
+      requestAnimationFrame(function() {
+        $('.lightbox-loading').removeClass('show');
+        $('#lightbox-img').css('opacity', '1');
+      });
+    };
+    img.src = imageSrc;
   }
   
   // 顯示下一張圖片
@@ -1316,7 +1359,7 @@ $(document).ready(function() {
         nextImg.attr('src', nextSrc);
       }
       
-      $('#lightbox-img').attr('src', nextSrc);
+      switchImage(nextSrc);
     }
   }
   
@@ -1332,7 +1375,7 @@ $(document).ready(function() {
         prevImg.attr('src', prevSrc);
       }
       
-      $('#lightbox-img').attr('src', prevSrc);
+      switchImage(prevSrc);
     }
   }
   
@@ -1344,6 +1387,13 @@ $(document).ready(function() {
   // 點擊lightbox背景關閉
   $('#lightbox').click(function(e) {
     if (e.target === this) {
+      hideLightbox();
+    }
+  });
+
+  // ESC鍵關閉lightbox
+  $(document).keydown(function(e) {
+    if (e.key === 'Escape' && $('#lightbox').hasClass('show')) {
       hideLightbox();
     }
   });
