@@ -40,6 +40,16 @@
       opacity: 1;
     }
 
+    /* 初始隱藏所有work_wrap元素 */
+    .work_wrap {
+      display: none;
+    }
+
+    /* 顯示前5個work_wrap元素 */
+    .work_wrap:nth-child(-n+5) {
+      display: block;
+    }
+
     /*!
 	 * Load Awesome v1.1.0 (http://github.danielcardoso.net/load-awesome/)
 	 * Copyright 2015 Daniel Cardoso <@DanielCardoso>
@@ -1238,6 +1248,136 @@
     </footer>
     <!--Desktop Footer-->
   </div>
+
+<!-- Lightbox HTML 結構 -->
+<div id="lightbox" class="lightbox">
+  <div class="lightbox-close"></div>
+  <div class="lightbox-content">
+    <img id="lightbox-img" src="" alt="">
+  </div>
+  <div class="lightbox-nav lightbox-prev"></div>
+  <div class="lightbox-nav lightbox-next"></div>
+</div>
+
+<script>
+$(document).ready(function() {
+  // Lightbox 功能
+  var currentImageIndex = 0;
+  var currentCarousel = null;
+  var allImages = [];
+  
+  // 為所有owl-carousel中的圖片添加點擊事件
+  $(document).on('click', '.owl-carousel img', function(e) {
+    e.preventDefault();
+    
+    var $clickedImg = $(this);
+    var $carousel = $clickedImg.closest('.owl-carousel');
+    var $allImages = $carousel.find('img');
+    
+    // 獲取當前圖片索引
+    currentImageIndex = $allImages.index($clickedImg);
+    currentCarousel = $carousel;
+    allImages = $allImages;
+    
+    // 獲取圖片源（處理lazy loading）
+    var imageSrc = $clickedImg.attr('data-src') || $clickedImg.attr('src');
+    
+    // 如果圖片還沒有加載，先加載再顯示
+    if ($clickedImg.attr('data-src') && !$clickedImg.attr('src')) {
+      $clickedImg.attr('src', imageSrc);
+    }
+    
+    // 顯示lightbox
+    showLightbox(imageSrc);
+  });
+  
+  // 顯示lightbox
+  function showLightbox(imageSrc) {
+    $('#lightbox-img').attr('src', imageSrc);
+    $('#lightbox').addClass('show');
+    $('body').css('overflow', 'hidden'); // 防止背景滾動
+  }
+  
+  // 隱藏lightbox
+  function hideLightbox() {
+    $('#lightbox').removeClass('show');
+    $('body').css('overflow', ''); // 恢復背景滾動
+  }
+  
+  // 顯示下一張圖片
+  function showNextImage() {
+    if (allImages.length > 1) {
+      currentImageIndex = (currentImageIndex + 1) % allImages.length;
+      var nextImg = allImages.eq(currentImageIndex);
+      var nextSrc = nextImg.attr('data-src') || nextImg.attr('src');
+      
+      // 如果圖片還沒有加載，先加載
+      if (nextImg.attr('data-src') && !nextImg.attr('src')) {
+        nextImg.attr('src', nextSrc);
+      }
+      
+      $('#lightbox-img').attr('src', nextSrc);
+    }
+  }
+  
+  // 顯示上一張圖片
+  function showPrevImage() {
+    if (allImages.length > 1) {
+      currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+      var prevImg = allImages.eq(currentImageIndex);
+      var prevSrc = prevImg.attr('data-src') || prevImg.attr('src');
+      
+      // 如果圖片還沒有加載，先加載
+      if (prevImg.attr('data-src') && !prevImg.attr('src')) {
+        prevImg.attr('src', prevSrc);
+      }
+      
+      $('#lightbox-img').attr('src', prevSrc);
+    }
+  }
+  
+  // 關閉lightbox
+  $('.lightbox-close').click(function() {
+    hideLightbox();
+  });
+  
+  // 點擊lightbox背景關閉
+  $('#lightbox').click(function(e) {
+    if (e.target === this) {
+      hideLightbox();
+    }
+  });
+  
+  // 下一張圖片
+  $('.lightbox-next').click(function(e) {
+    e.stopPropagation();
+    showNextImage();
+  });
+  
+  // 上一張圖片
+  $('.lightbox-prev').click(function(e) {
+    e.stopPropagation();
+    showPrevImage();
+  });
+  
+  // 鍵盤控制
+  $(document).keydown(function(e) {
+    if ($('#lightbox').is(':visible')) {
+      switch(e.keyCode) {
+        case 27: // ESC鍵
+          hideLightbox();
+          break;
+        case 37: // 左箭頭
+          showPrevImage();
+          break;
+        case 39: // 右箭頭
+          showNextImage();
+          break;
+      }
+    }
+  });
+});
+</script>
 </body>
 <script src="js/owl.carousel.js"></script>
 <script src="js/owl.lazyload.js"></script>
@@ -1245,26 +1385,74 @@
 <!--Filter-->
 <script type="text/javascript">
   $(document).ready(function () {
+    // 初始化變數
+    var currentIndex = 5; // 已經顯示的元素數量
+    var itemsPerLoad = 5; // 每次載入的元素數量
+    var isLoading = false; // 防止重複載入
+    var isFiltered = false; // 是否正在篩選模式
+    var currentFilter = 'all'; // 當前篩選類別
+
+    // 篩選功能
     $('#filterOptions li a').click(function () {
-      // fetch the class of the clicked item
+      // 獲取點擊項目的類別
       var ourClass = $(this).attr('class');
 
-      // reset the active class on all the buttons
+      // 重置所有按鈕的active類別
       $('#filterOptions li').removeClass('active');
-      // update the active state on our clicked button
+      // 更新點擊按鈕的active狀態
       $(this).parent().addClass('active');
 
+      // 設置篩選模式
+      isFiltered = true;
+      currentFilter = ourClass;
+
       if (ourClass == 'all') {
-        // show all our items
+        // 顯示所有項目
         $('#ourHolder').children('div.work_wrap').show();
+        isFiltered = false;
+        currentFilter = 'all';
       }
       else {
-        // hide all elements that don't share ourClass
+        // 隱藏所有不屬於ourClass的元素
         $('#ourHolder').children('div:not(.' + ourClass + ')').hide();
-        // show all elements that do share ourClass
+        // 顯示所有屬於ourClass的元素
         $('#ourHolder').children('div.' + ourClass).show();
       }
       return false;
+    });
+
+    // 滾動載入功能
+    function loadMoreItems() {
+      if (isLoading || isFiltered) return;
+
+      isLoading = true;
+      
+      var $workWraps = $('#ourHolder').children('div.work_wrap');
+      var totalItems = $workWraps.length;
+      
+      if (currentIndex >= totalItems) {
+        isLoading = false;
+        return;
+      }
+
+      // 計算要顯示的元素範圍
+      var endIndex = Math.min(currentIndex + itemsPerLoad, totalItems);
+      
+      // 顯示下一批元素
+      for (var i = currentIndex; i < endIndex; i++) {
+        $($workWraps[i]).show();
+      }
+      
+      currentIndex = endIndex;
+      isLoading = false;
+    }
+
+    // 監聽滾動事件
+    $(window).scroll(function() {
+      // 檢查是否接近頁面底部
+      if ($(window).scrollTop() + $(window).height() >= $(document).height() - 200) {
+        loadMoreItems();
+      }
     });
   });
 </script>
