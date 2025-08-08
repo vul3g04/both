@@ -565,7 +565,10 @@ body.lightbox-open {
 .lightbox-next {
 	background-position: center center;
 	background-repeat: no-repeat;
-	
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, 1);
 }
 
 .lightbox-prev {
@@ -583,23 +586,53 @@ body.lightbox-open {
   cursor: pointer;
 }
 
-/* 響應式設計 */
-@media screen and (max-width: 1400px) {
+/* 響應式設計 - 平板和手機的直向瀏覽模式 */
+@media screen and (max-width: 1024px) and (orientation: portrait) {
   .lightbox-close {
-    top: 15px;
-    right: 20px;
-    font-size: 30px;
+    top: 10px;
+    right: 10px;
+  }
+
+  .lightbox-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: calc(100% - 160px);
+    margin: 0;
+    padding: 0;
+  }
+
+  .lightbox-content img {
+    max-height: calc(100vh - 180px);
   }
   
-  .lightbox-nav {
-		top: calc(100% - 48px);
+  .lightbox-nav.lightbox-prev,
+  .lightbox-nav.lightbox-next {
+    position: fixed;
+    top: auto;
+    bottom: 40px;
+    transform: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 1);
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    z-index: 10001;
   }
   
-  .lightbox-prev {
-		left: calc(50% - 68px);
+  .lightbox-nav.lightbox-prev {
+    right: 52%;
+    left: auto;
+    background-image: url(../../img/icon_prev.svg);
   }
   
-  .lightbox-next {
-		right:calc(50% - 68px);
+  .lightbox-nav.lightbox-next {
+    left: 52%;
+    right: auto;
+    background-image: url(../../img/icon_next.svg);
   }
 }

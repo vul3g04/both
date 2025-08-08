@@ -1436,9 +1436,7 @@ $(document).ready(function() {
 <script type="text/javascript">
   $(document).ready(function () {
     // 初始化變數
-    var currentIndex = 5; // 已經顯示的元素數量
-    var itemsPerLoad = 5; // 每次載入的元素數量
-    var isLoading = false; // 防止重複載入
+    // 所有作品一次性顯示，不需要分批載入
     var isFiltered = false; // 是否正在篩選模式
     var currentFilter = 'all'; // 當前篩選類別
 
@@ -1471,33 +1469,14 @@ $(document).ready(function() {
       return false;
     });
 
-    // 滾動載入功能
-    function loadMoreItems() {
-      if (isLoading || isFiltered) return;
-
-      isLoading = true;
-      
+    // 顯示所有作品
+    function showAllItems() {
       var $workWraps = $('#ourHolder').children('div.work_wrap');
-      var totalItems = $workWraps.length;
-      
-      if (currentIndex >= totalItems) {
-        isLoading = false;
-        return;
-      }
-
-      // 計算要顯示的元素範圍
-      var endIndex = Math.min(currentIndex + itemsPerLoad, totalItems);
-      
-      // 顯示下一批元素
-      for (var i = currentIndex; i < endIndex; i++) {
-        $($workWraps[i]).show();
-      }
-      
-      currentIndex = endIndex;
-      isLoading = false;
+      $workWraps.show();
     }
 
-    // 監聽滾動事件
+    // 初始化顯示所有作品
+    showAllItems();
     $(window).scroll(function() {
       // 檢查是否接近頁面底部
       if ($(window).scrollTop() + $(window).height() >= $(document).height() - 200) {
