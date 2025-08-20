@@ -1258,6 +1258,7 @@
     <div class="lightbox-loading">
       <div class="loading-spinner"></div>
     </div>
+
   </div>
   <div class="lightbox-nav lightbox-prev"></div>
   <div class="lightbox-nav lightbox-next"></div>
@@ -1276,12 +1277,53 @@ $(document).ready(function() {
     
     var $clickedImg = $(this);
     var $carousel = $clickedImg.closest('.owl-carousel');
-    var $allImages = $carousel.find('img');
     
-    // 獲取當前圖片索引
-    currentImageIndex = $allImages.index($clickedImg);
+    // 獲取當前點擊的圖片URL
+    var clickedImageSrc = $clickedImg.attr('data-src') || $clickedImg.attr('src');
+    
+    // 使用最可靠的方法：直接從HTML中解析圖片URL
+    var $workWrap = $carousel.closest('.work_wrap');
+    var carouselHtml = $workWrap.find('.owl-carousel').html();
+    
+    // 使用正則表達式提取所有圖片URL
+    var imgMatches = carouselHtml.match(/data-src="([^"]+)"/g);
+    var imageUrls = [];
+    
+    if (imgMatches) {
+      // 提取URL並去重
+      imgMatches.forEach(function(match) {
+        var url = match.match(/data-src="([^"]+)"/)[1];
+        if (imageUrls.indexOf(url) === -1) {
+          imageUrls.push(url);
+        }
+      });
+    }
+    
+    // 如果正則表達式方法失敗，使用備用方法
+    if (imageUrls.length === 0) {
+      var $allImages = $carousel.find('img');
+      
+      $allImages.each(function() {
+        var imgSrc = $(this).attr('data-src') || $(this).attr('src');
+        if (imageUrls.indexOf(imgSrc) === -1) {
+          imageUrls.push(imgSrc);
+        }
+      });
+    }
+    
+    // 在圖片URL列表中查找當前圖片的索引
+    currentImageIndex = imageUrls.indexOf(clickedImageSrc);
     currentCarousel = $carousel;
-    allImages = $allImages;
+    
+    // 創建虛擬的圖片元素數組，只包含URL信息
+    allImages = imageUrls.map(function(url) {
+      return { src: url };
+    });
+    
+    // 重置索引確保在有效範圍內
+    if (currentImageIndex < 0 || currentImageIndex >= allImages.length) {
+      currentImageIndex = 0;
+    }
     
     // 獲取圖片源（處理lazy loading）
     var imageSrc = $clickedImg.attr('data-src') || $clickedImg.attr('src');
@@ -1290,6 +1332,8 @@ $(document).ready(function() {
     if ($clickedImg.attr('data-src') && !$clickedImg.attr('src')) {
       $clickedImg.attr('src', imageSrc);
     }
+    
+
     
     // 顯示lightbox
     showLightbox(imageSrc);
@@ -1319,6 +1363,13 @@ $(document).ready(function() {
       .css('padding-right', '')
       .css('top', '');
     window.scrollTo(0, scrollPosition);
+    
+    // 重置lightbox狀態
+    currentImageIndex = 0;
+    currentCarousel = null;
+    allImages = [];
+    
+
   }
   
   // 計算scrollbar寬度
@@ -1344,38 +1395,76 @@ $(document).ready(function() {
         $('#lightbox-img').css('opacity', '1');
       });
     };
+    
+    img.onerror = function() {
+      // 圖片載入失敗時的處理
+      console.error('圖片載入失敗:', imageSrc);
+      $('.lightbox-loading').removeClass('show');
+      $('#lightbox-img').css('opacity', '1');
+    };
+    
     img.src = imageSrc;
+  }
+  
+  // 預載圖片（用於lazy loading）
+  function preloadImage(imageSrc) {
+    return new Promise(function(resolve, reject) {
+      var img = new Image();
+      img.onload = function() {
+        resolve(img);
+      };
+      img.onerror = function() {
+        reject(new Error('圖片載入失敗: ' + imageSrc));
+      };
+      img.src = imageSrc;
+    });
+  }
+  
+  // 驗證並重置圖片索引
+  function validateImageIndex() {
+    if (currentImageIndex < 0 || currentImageIndex >= allImages.length) {
+      currentImageIndex = 0;
+      console.warn('圖片索引超出範圍，已重置為0');
+    }
+    
+
   }
   
   // 顯示下一張圖片
   function showNextImage() {
     if (allImages.length > 1) {
+      // 驗證當前索引
+      validateImageIndex();
+      
+      // 計算下一張圖片的索引
       currentImageIndex = (currentImageIndex + 1) % allImages.length;
-      var nextImg = allImages.eq(currentImageIndex);
-      var nextSrc = nextImg.attr('data-src') || nextImg.attr('src');
       
-      // 如果圖片還沒有加載，先加載
-      if (nextImg.attr('data-src') && !nextImg.attr('src')) {
-        nextImg.attr('src', nextSrc);
-      }
+      // 獲取下一張圖片
+      var nextSrc = allImages[currentImageIndex].src;
       
+      // 切換到下一張圖片
       switchImage(nextSrc);
+      
+
     }
   }
   
   // 顯示上一張圖片
   function showPrevImage() {
     if (allImages.length > 1) {
+      // 驗證當前索引
+      validateImageIndex();
+      
+      // 計算上一張圖片的索引，處理負數情況
       currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
-      var prevImg = allImages.eq(currentImageIndex);
-      var prevSrc = prevImg.attr('data-src') || prevImg.attr('src');
       
-      // 如果圖片還沒有加載，先加載
-      if (prevImg.attr('data-src') && !prevImg.attr('src')) {
-        prevImg.attr('src', prevSrc);
-      }
+      // 獲取上一張圖片
+      var prevSrc = allImages[currentImageIndex].src;
       
+      // 切換到上一張圖片
       switchImage(prevSrc);
+      
+
     }
   }
   
@@ -1496,7 +1585,7 @@ $(document).ready(function() {
 <script>
   $('.owl-carousel').owlCarousel({
     nav: true,
-    loop: true,
+    loop: true, // 保持循環功能
     margin: 1,
     lazyLoad: true,
     stagePadding: 0,
