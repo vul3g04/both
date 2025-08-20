@@ -527,7 +527,7 @@ body.lightbox-open {
 	right: 30px;
 	width: 60px;
 	height: 60px;
-	background-image: url(../img/icon_close.svg);
+	background-image: url(../../img/icon_close.svg);
 	background-repeat: no-repeat;
 	background-position: center center;
   cursor: pointer;
@@ -573,12 +573,12 @@ body.lightbox-open {
 
 .lightbox-prev {
   left: 30px;
-	background-image: url(../img/icon_prev.svg);
+	background-image: url(../../img/icon_prev.svg);
 }
 
 .lightbox-next {
   right: 30px;
-	background-image: url(../img/icon_next.svg);
+	background-image: url(../../img/icon_next.svg);
 }
 
 /* 讓owl-carousel中的圖片可點擊 */
