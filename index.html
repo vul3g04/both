@@ -1265,38 +1265,55 @@
 
 <script>
 $(document).ready(function() {
-  // Lightbox 功能
+  // Lightbox 功能 - 修正 owl.carousel clone 導致索引錯位問題
   var currentImageIndex = 0;
-  var currentCarousel = null;
-  var allImages = [];
-  
-  // 為所有owl-carousel中的圖片添加點擊事件
+  var gallery = []; // 儲存原始（非 cloned）圖片的 src 陣列
+  var $originalImgs = $(); // jQuery 集合，用於 lazy load 原始元素
+
+  // 當點擊 carousel 中的圖片時，建立 gallery（只取 .owl-item 但排除 .cloned）
   $(document).on('click', '.owl-carousel img', function(e) {
     e.preventDefault();
-    
+
     var $clickedImg = $(this);
     var $carousel = $clickedImg.closest('.owl-carousel');
-    var $allImages = $carousel.find('img');
-    
-    // 獲取當前圖片索引
-    currentImageIndex = $allImages.index($clickedImg);
-    currentCarousel = $carousel;
-    allImages = $allImages;
-    
-    // 獲取圖片源（處理lazy loading）
-    var imageSrc = $clickedImg.attr('data-src') || $clickedImg.attr('src');
-    
-    // 如果圖片還沒有加載，先加載再顯示
-    if ($clickedImg.attr('data-src') && !$clickedImg.attr('src')) {
-      $clickedImg.attr('src', imageSrc);
+
+    // 只選取非 cloned 的 owl-item 內的 img（避免計算到 clone）
+    $originalImgs = $carousel.find('.owl-item').not('.cloned').find('img');
+
+    // 建立 gallery：先用 data-src（lazy）回退到 src，並去重以防萬一
+    gallery = $originalImgs.map(function() {
+      return $(this).attr('data-src') || $(this).attr('src') || '';
+    }).get();
+    // 移除空字串和重複值（保留原始順序）
+    gallery = gallery.filter(function(v, i, a){ return v && a.indexOf(v) === i; });
+
+    // 找到被點擊的圖片在 gallery 的索引（使用 data-src 或 src）
+    var clickedSrc = $clickedImg.attr('data-src') || $clickedImg.attr('src');
+    currentImageIndex = gallery.indexOf(clickedSrc);
+    if (currentImageIndex === -1) {
+      // 如果沒找到，嘗試以純 src 比對（某些情況 data-src 與 src 不一致）
+      currentImageIndex = gallery.indexOf($clickedImg.attr('src'));
     }
-    
-    // 顯示lightbox
-    showLightbox(imageSrc);
+
+    // 若點到 clone（極少數），也嘗試用 src 與原始集合做比對
+    if (currentImageIndex === -1) {
+      var clicked = $clickedImg.attr('src') || $clickedImg.attr('data-src');
+      $originalImgs.each(function(i, el) {
+        var s = $(el).attr('data-src') || $(el).attr('src');
+        if (s === clicked && currentImageIndex === -1) currentImageIndex = i;
+      });
+    }
+
+    // 確保如果點擊的項目還沒設 src（lazy load），先設一次
+    if ($clickedImg.attr('data-src') && !$clickedImg.attr('src')) {
+      $clickedImg.attr('src', $clickedImg.attr('data-src'));
+    }
+
+    showLightbox(gallery[currentImageIndex]);
   });
-  
-  // 顯示lightbox
+
   function showLightbox(imageSrc) {
+    if (!imageSrc) return;
     var scrollPosition = window.pageYOffset;
     $('#lightbox').addClass('show');
     $('body')
@@ -1304,41 +1321,32 @@ $(document).ready(function() {
       .css('padding-right', getScrollbarWidth() + 'px')
       .css('top', -scrollPosition + 'px');
     $('body').data('scroll-position', scrollPosition);
-    
-    // 使用圖片切換函數來載入第一張圖片
+
     switchImage(imageSrc);
   }
-  
-  // 隱藏lightbox
+
   function hideLightbox() {
     var scrollPosition = $('body').data('scroll-position');
     $('#lightbox').removeClass('show');
-    $('.lightbox-loading').removeClass('show'); // 確保loading被隱藏
+    $('.lightbox-loading').removeClass('show');
     $('body')
       .removeClass('lightbox-open')
       .css('padding-right', '')
       .css('top', '');
     window.scrollTo(0, scrollPosition);
   }
-  
-  // 計算scrollbar寬度
+
   function getScrollbarWidth() {
     return window.innerWidth - document.documentElement.clientWidth;
   }
-  
-  // 切換圖片時顯示loading
+
   function switchImage(imageSrc) {
-    // 顯示loading並隱藏當前圖片
     $('.lightbox-loading').addClass('show');
     $('#lightbox-img').css('opacity', '0');
-    
-    // 預載新圖片
+
     var img = new Image();
     img.onload = function() {
-      // 圖片已載入，可以進行切換
       $('#lightbox-img').attr('src', imageSrc);
-      
-      // 確保DOM更新後再進行顯示
       requestAnimationFrame(function() {
         $('.lightbox-loading').removeClass('show');
         $('#lightbox-img').css('opacity', '1');
@@ -1346,87 +1354,54 @@ $(document).ready(function() {
     };
     img.src = imageSrc;
   }
-  
-  // 顯示下一張圖片
+
   function showNextImage() {
-    if (allImages.length > 1) {
-      currentImageIndex = (currentImageIndex + 1) % allImages.length;
-      var nextImg = allImages.eq(currentImageIndex);
-      var nextSrc = nextImg.attr('data-src') || nextImg.attr('src');
-      
-      // 如果圖片還沒有加載，先加載
-      if (nextImg.attr('data-src') && !nextImg.attr('src')) {
-        nextImg.attr('src', nextSrc);
-      }
-      
-      switchImage(nextSrc);
+    if (gallery.length <= 1) return;
+    currentImageIndex = (currentImageIndex + 1) % gallery.length;
+    var nextSrc = gallery[currentImageIndex];
+
+    // lazy load: 找到對應的原始 img 元素並確保有 src
+    var $next = $originalImgs.filter(function() {
+      return ($(this).attr('data-src') || $(this).attr('src')) === nextSrc;
+    }).first();
+    if ($next.length && $next.attr('data-src') && !$next.attr('src')) {
+      $next.attr('src', $next.attr('data-src'));
     }
+
+    switchImage(nextSrc);
   }
-  
-  // 顯示上一張圖片
+
   function showPrevImage() {
-    if (allImages.length > 1) {
-      currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
-      var prevImg = allImages.eq(currentImageIndex);
-      var prevSrc = prevImg.attr('data-src') || prevImg.attr('src');
-      
-      // 如果圖片還沒有加載，先加載
-      if (prevImg.attr('data-src') && !prevImg.attr('src')) {
-        prevImg.attr('src', prevSrc);
-      }
-      
-      switchImage(prevSrc);
+    if (gallery.length <= 1) return;
+    currentImageIndex = (currentImageIndex - 1 + gallery.length) % gallery.length;
+    var prevSrc = gallery[currentImageIndex];
+
+    var $prev = $originalImgs.filter(function() {
+      return ($(this).attr('data-src') || $(this).attr('src')) === prevSrc;
+    }).first();
+    if ($prev.length && $prev.attr('data-src') && !$prev.attr('src')) {
+      $prev.attr('src', $prev.attr('data-src'));
     }
+
+    switchImage(prevSrc);
   }
-  
-  // 關閉lightbox
-  $('.lightbox-close').click(function() {
-    hideLightbox();
-  });
-  
-  // 點擊lightbox背景關閉
-  $('#lightbox').click(function(e) {
-    if (e.target === this) {
-      hideLightbox();
+
+  // 關閉、背景點擊、鍵盤、左右按鈕
+  $('.lightbox-close').click(function() { hideLightbox(); });
+  $('#lightbox').click(function(e) { if (e.target === this) hideLightbox(); });
+
+  $(document).keydown(function(e) {
+    if ($('#lightbox').hasClass('show')) {
+      if (e.key === 'Escape') hideLightbox();
+      if (e.key === 'ArrowRight') showNextImage();
+      if (e.key === 'ArrowLeft') showPrevImage();
     }
   });
 
-  // ESC鍵關閉lightbox
-  $(document).keydown(function(e) {
-    if (e.key === 'Escape' && $('#lightbox').hasClass('show')) {
-      hideLightbox();
-    }
-  });
-  
-  // 下一張圖片
-  $('.lightbox-next').click(function(e) {
-    e.stopPropagation();
-    showNextImage();
-  });
-  
-  // 上一張圖片
-  $('.lightbox-prev').click(function(e) {
-    e.stopPropagation();
-    showPrevImage();
-  });
-  
-  // 鍵盤控制
-  $(document).keydown(function(e) {
-    if ($('#lightbox').is(':visible')) {
-      switch(e.keyCode) {
-        case 27: // ESC鍵
-          hideLightbox();
-          break;
-        case 37: // 左箭頭
-          showPrevImage();
-          break;
-        case 39: // 右箭頭
-          showNextImage();
-          break;
-      }
-    }
-  });
+  $('.lightbox-next').click(function(e){ e.stopPropagation(); showNextImage(); });
+  $('.lightbox-prev').click(function(e){ e.stopPropagation(); showPrevImage(); });
 });
+</script>
 </script>
 </body>
 <script src="js/owl.carousel.js"></script>
