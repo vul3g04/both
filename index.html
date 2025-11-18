@@ -1267,6 +1267,7 @@
 $(document).ready(function() {
   // Lightbox 功能 - 修正 owl.carousel clone 導致索引錯位問題
   var currentImageIndex = 0;
+  var isSwitching = false; // 防止快速連點造成多次切換
   var gallery = []; // 儲存原始（非 cloned）圖片的 src 陣列
   var $originalImgs = $(); // jQuery 集合，用於 lazy load 原始元素
 
@@ -1341,6 +1342,10 @@ $(document).ready(function() {
   }
 
   function switchImage(imageSrc) {
+    // 若正在切換中，跳過多餘調用
+    if (isSwitching) return;
+    isSwitching = true;
+
     $('.lightbox-loading').addClass('show');
     $('#lightbox-img').css('opacity', '0');
 
@@ -1350,12 +1355,20 @@ $(document).ready(function() {
       requestAnimationFrame(function() {
         $('.lightbox-loading').removeClass('show');
         $('#lightbox-img').css('opacity', '1');
+        // 延遲一個 frame 後解除鎖定，確保過渡完成
+        requestAnimationFrame(function(){ isSwitching = false; });
       });
+    };
+    img.onerror = function(){
+      // 若圖片載入失敗，也要解除鎖定避免無限鎖死
+      $('.lightbox-loading').removeClass('show');
+      isSwitching = false;
     };
     img.src = imageSrc;
   }
 
   function showNextImage() {
+    if (isSwitching) return;
     if (gallery.length <= 1) return;
     currentImageIndex = (currentImageIndex + 1) % gallery.length;
     var nextSrc = gallery[currentImageIndex];
@@ -1372,6 +1385,7 @@ $(document).ready(function() {
   }
 
   function showPrevImage() {
+    if (isSwitching) return;
     if (gallery.length <= 1) return;
     currentImageIndex = (currentImageIndex - 1 + gallery.length) % gallery.length;
     var prevSrc = gallery[currentImageIndex];
