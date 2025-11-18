@@ -1315,6 +1315,8 @@ $(document).ready(function() {
 
   function showLightbox(imageSrc) {
     if (!imageSrc) return;
+    // 如果 lightbox 已經開啟，不要重新 open（避免其他 click/touch 事件在開啟時重新設定圖片）
+    if ($('#lightbox').hasClass('show')) return;
     var scrollPosition = window.pageYOffset;
     $('#lightbox').addClass('show');
     $('body')
@@ -1347,6 +1349,8 @@ $(document).ready(function() {
     isSwitching = true;
 
     $('.lightbox-loading').addClass('show');
+    // 暫時取消左右按鈕互動，避免在切換期間收到重複事件
+    $('.lightbox-next, .lightbox-prev').addClass('disabled');
     // 先移除任何舊的 transitionend 監聽，並隱藏圖片準備過渡
     $('#lightbox-img').off('transitionend.lightboxUnlock');
     $('#lightbox-img').css('opacity', '0');
@@ -1357,6 +1361,7 @@ $(document).ready(function() {
       if (fallbackTimer) clearTimeout(fallbackTimer);
       $('#lightbox-img').off('transitionend.lightboxUnlock');
       $('.lightbox-loading').removeClass('show');
+      $('.lightbox-next, .lightbox-prev').removeClass('disabled');
       isSwitching = false;
     };
 
