@@ -1347,23 +1347,47 @@ $(document).ready(function() {
     isSwitching = true;
 
     $('.lightbox-loading').addClass('show');
+    // 先移除任何舊的 transitionend 監聽，並隱藏圖片準備過渡
+    $('#lightbox-img').off('transitionend.lightboxUnlock');
     $('#lightbox-img').css('opacity', '0');
 
     var img = new Image();
-    img.onload = function() {
-      $('#lightbox-img').attr('src', imageSrc);
-      requestAnimationFrame(function() {
-        $('.lightbox-loading').removeClass('show');
-        $('#lightbox-img').css('opacity', '1');
-        // 延遲一個 frame 後解除鎖定，確保過渡完成
-        requestAnimationFrame(function(){ isSwitching = false; });
-      });
-    };
-    img.onerror = function(){
-      // 若圖片載入失敗，也要解除鎖定避免無限鎖死
+    var fallbackTimer = null;
+    var cleanup = function() {
+      if (fallbackTimer) clearTimeout(fallbackTimer);
+      $('#lightbox-img').off('transitionend.lightboxUnlock');
       $('.lightbox-loading').removeClass('show');
       isSwitching = false;
     };
+
+    img.onload = function() {
+      // 設定 src，觸發瀏覽器載入與圖片切換
+      $('#lightbox-img').attr('src', imageSrc);
+
+      // 強制重排以確保 transition 生效
+      void $('#lightbox-img')[0].offsetWidth;
+
+      // 當圖片的 opacity 過渡結束時解除鎖定
+      $('#lightbox-img').on('transitionend.lightboxUnlock', function(e) {
+        // 只回應 opacity 的 transition
+        if (e.originalEvent && e.originalEvent.propertyName && e.originalEvent.propertyName !== 'opacity') return;
+        cleanup();
+      });
+
+      // 觸發顯示（CSS 有設定 opacity transition）
+      $('#lightbox-img').css('opacity', '1');
+
+      // 備援：若 transitionend 未觸發，超時後也解除鎖定
+      fallbackTimer = setTimeout(function() {
+        cleanup();
+      }, 500);
+    };
+
+    img.onerror = function(){
+      // 若圖片載入失敗，也要解除鎖定避免無限鎖死
+      cleanup();
+    };
+
     img.src = imageSrc;
   }
 
