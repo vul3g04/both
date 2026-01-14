@@ -1287,7 +1287,8 @@
 
       // 清除網址 hash
       function clearUrlHash() {
-        history.replaceState(null, null, window.location.pathname + window.location.search);
+        // 使用 pushState 以便瀏覽器能正確追蹤狀態變更
+        history.pushState(null, null, window.location.pathname + window.location.search);
       }
 
       // 從網址 hash 獲取專案名稱
@@ -1507,13 +1508,28 @@
       });
 
       // 頁面載入時檢查網址 hash，如果有專案名稱則自動開啟 lightbox
-      var projectFromHash = getProjectFromHash();
-      if (projectFromHash) {
-        // 等待 owl-carousel 初始化完成後再開啟 lightbox
-        setTimeout(function () {
+      function checkAndOpenFromHash() {
+        var projectFromHash = getProjectFromHash();
+        if (projectFromHash && !$('#lightbox').hasClass('show')) {
           openLightboxByProjectName(projectFromHash);
-        }, 500);
+        }
       }
+
+      // 監聽 hashchange 事件（處理同一頁面內網址 hash 變更）
+      $(window).on('hashchange', function () {
+        checkAndOpenFromHash();
+      });
+
+      // 頁面完全載入後檢查 hash（使用 window.load 確保所有資源都已載入）
+      $(window).on('load', function () {
+        var projectFromHash = getProjectFromHash();
+        if (projectFromHash) {
+          // 等待 owl-carousel 初始化完成後再開啟 lightbox
+          setTimeout(function () {
+            checkAndOpenFromHash();
+          }, 100);
+        }
+      });
     });
   </script>
 </body>
