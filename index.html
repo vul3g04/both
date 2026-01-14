@@ -1271,6 +1271,73 @@
       var currentCarousel = null;
       var allImages = [];
 
+      // 從圖片路徑中提取專案名稱
+      function getProjectNameFromPath(imagePath) {
+        // 路徑格式: img/project/project_name/01.jpg
+        var match = imagePath.match(/img\/project\/([^\/]+)\//);
+        return match ? match[1] : null;
+      }
+
+      // 更新網址 hash
+      function updateUrlHash(projectName) {
+        if (projectName) {
+          history.replaceState(null, null, '#project=' + projectName);
+        }
+      }
+
+      // 清除網址 hash
+      function clearUrlHash() {
+        history.replaceState(null, null, window.location.pathname + window.location.search);
+      }
+
+      // 從網址 hash 獲取專案名稱
+      function getProjectFromHash() {
+        var hash = window.location.hash;
+        if (hash && hash.indexOf('#project=') === 0) {
+          return hash.substring(9); // 移除 '#project=' 前綴
+        }
+        return null;
+      }
+
+      // 根據專案名稱找到對應的 carousel 並開啟 lightbox
+      function openLightboxByProjectName(projectName) {
+        // 找到包含該專案圖片的 carousel
+        var $targetCarousel = null;
+        var $targetImg = null;
+
+        $('.owl-carousel').each(function () {
+          var $carousel = $(this);
+          var $firstImg = $carousel.find('img').first();
+          var imgPath = $firstImg.attr('data-src') || $firstImg.attr('src');
+
+          if (imgPath) {
+            var carouselProjectName = getProjectNameFromPath(imgPath);
+            if (carouselProjectName === projectName) {
+              $targetCarousel = $carousel;
+              $targetImg = $firstImg;
+              return false; // 跳出 each 迴圈
+            }
+          }
+        });
+
+        if ($targetCarousel && $targetImg) {
+          var $allImages = $targetCarousel.find('img');
+          currentImageIndex = 0;
+          currentCarousel = $targetCarousel;
+          allImages = $allImages;
+
+          var imageSrc = $targetImg.attr('data-src') || $targetImg.attr('src');
+
+          // 如果圖片還沒有加載，先加載再顯示
+          if ($targetImg.attr('data-src') && !$targetImg.attr('src')) {
+            $targetImg.attr('src', imageSrc);
+          }
+
+          // 顯示 lightbox
+          showLightbox(imageSrc, projectName);
+        }
+      }
+
       // 為所有owl-carousel中的圖片添加點擊事件
       $(document).on('click', '.owl-carousel img', function (e) {
         e.preventDefault();
@@ -1292,12 +1359,15 @@
           $clickedImg.attr('src', imageSrc);
         }
 
+        // 從圖片路徑獲取專案名稱並更新網址
+        var projectName = getProjectNameFromPath(imageSrc);
+
         // 顯示lightbox
-        showLightbox(imageSrc);
+        showLightbox(imageSrc, projectName);
       });
 
       // 顯示lightbox
-      function showLightbox(imageSrc) {
+      function showLightbox(imageSrc, projectName) {
         var scrollPosition = window.pageYOffset;
         $('#lightbox').addClass('show');
         $('body')
@@ -1305,6 +1375,11 @@
           .css('padding-right', getScrollbarWidth() + 'px')
           .css('top', -scrollPosition + 'px');
         $('body').data('scroll-position', scrollPosition);
+
+        // 更新網址 hash
+        if (projectName) {
+          updateUrlHash(projectName);
+        }
 
         // 使用圖片切換函數來載入第一張圖片
         switchImage(imageSrc);
@@ -1320,6 +1395,9 @@
           .css('padding-right', '')
           .css('top', '');
         window.scrollTo(0, scrollPosition);
+
+        // 清除網址 hash
+        clearUrlHash();
       }
 
       // 計算scrollbar寬度
@@ -1427,6 +1505,15 @@
           }
         }
       });
+
+      // 頁面載入時檢查網址 hash，如果有專案名稱則自動開啟 lightbox
+      var projectFromHash = getProjectFromHash();
+      if (projectFromHash) {
+        // 等待 owl-carousel 初始化完成後再開啟 lightbox
+        setTimeout(function () {
+          openLightboxByProjectName(projectFromHash);
+        }, 500);
+      }
     });
   </script>
 </body>
