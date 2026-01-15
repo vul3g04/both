@@ -1300,6 +1300,20 @@
         return null;
       }
 
+      // 獲取真實圖片（排除複製的項目）
+      function getRealImages($carousel) {
+        // Owl Carousel 會複製項目用於無限循環，我們需要排除這些 (.cloned)
+        // 找出所有 .owl-item 但不是 .cloned 的項目中的圖片
+        var $realItems = $carousel.find('.owl-item:not(.cloned) img');
+
+        // 如果找不到 owl-item (可能尚未初始化)，則回傳所有圖片
+        if ($realItems.length === 0) {
+          return $carousel.find('img');
+        }
+
+        return $realItems;
+      }
+
       // 根據專案名稱找到對應的 carousel 並開啟 lightbox
       function openLightboxByProjectName(projectName) {
         // 找到包含該專案圖片的 carousel
@@ -1308,24 +1322,34 @@
 
         $('.owl-carousel').each(function () {
           var $carousel = $(this);
-          var $firstImg = $carousel.find('img').first();
-          var imgPath = $firstImg.attr('data-src') || $firstImg.attr('src');
+          // 使用真實圖片列表來尋找
+          var $realImages = getRealImages($carousel);
+          var $firstImg = $realImages.first();
 
-          if (imgPath) {
-            var carouselProjectName = getProjectNameFromPath(imgPath);
-            if (carouselProjectName === projectName) {
-              $targetCarousel = $carousel;
-              $targetImg = $firstImg;
-              return false; // 跳出 each 迴圈
+          if ($firstImg.length > 0) {
+            var imgPath = $firstImg.attr('data-src') || $firstImg.attr('src');
+
+            if (imgPath) {
+              var carouselProjectName = getProjectNameFromPath(imgPath);
+              if (carouselProjectName === projectName) {
+                $targetCarousel = $carousel;
+                $targetImg = $firstImg;
+                return false; // 跳出 each 迴圈
+              }
             }
           }
         });
 
         if ($targetCarousel && $targetImg) {
-          var $allImages = $targetCarousel.find('img');
+          // 只獲取真實圖片列表
+          var $realImages = getRealImages($targetCarousel);
+
+          // 確保使用第一張真實圖片
+          $targetImg = $realImages.first();
+
           currentImageIndex = 0;
           currentCarousel = $targetCarousel;
-          allImages = $allImages;
+          allImages = $realImages;
 
           var imageSrc = $targetImg.attr('data-src') || $targetImg.attr('src');
 
@@ -1345,15 +1369,34 @@
 
         var $clickedImg = $(this);
         var $carousel = $clickedImg.closest('.owl-carousel');
-        var $allImages = $carousel.find('img');
 
-        // 獲取當前圖片索引
-        currentImageIndex = $allImages.index($clickedImg);
-        currentCarousel = $carousel;
-        allImages = $allImages;
+        // 獲取真實圖片列表
+        var $realImages = getRealImages($carousel);
 
         // 獲取圖片源（處理lazy loading）
         var imageSrc = $clickedImg.attr('data-src') || $clickedImg.attr('src');
+
+        // 在真實圖片列表中尋找點擊圖片的索引（比對 src）
+        // 因為點擊的可能是 cloned 的圖片，所以不能直接用 index($clickedImg)
+        var clickedIndex = -1;
+
+        $realImages.each(function (index) {
+          var $img = $(this);
+          var src = $img.attr('data-src') || $img.attr('src');
+          if (src === imageSrc) {
+            clickedIndex = index;
+            return false; // Found
+          }
+        });
+
+        if (clickedIndex === -1) {
+          // 如果真的找不到，就預設為 0
+          clickedIndex = 0;
+        }
+
+        currentImageIndex = clickedIndex;
+        currentCarousel = $carousel;
+        allImages = $realImages;
 
         // 如果圖片還沒有加載，先加載再顯示
         if ($clickedImg.attr('data-src') && !$clickedImg.attr('src')) {
