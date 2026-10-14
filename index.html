@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-<!-- 檔案來自GITHUB -->
 
 <head>
   <meta charset="utf-8">
@@ -22,7 +21,7 @@
   <meta property="og:site_name" content="BOTH STUDIO" />
   <link rel="canonical" href="https://both.ws/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="format-detection" content="telephone=no">
@@ -31,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/index_new2.css">
+  <link rel="stylesheet" href="css/index_new2.css?v=20261014">
   <link rel="stylesheet" href="css/lightbox-loading.css">
   <link rel="stylesheet" href="css/owlcarousel/owl.carousel.css">
   <link rel="stylesheet" href="css/owlcarousel/owl.theme.default.css">
@@ -1655,6 +1654,15 @@
           } else if (e.key === 'ArrowRight' || e.keyCode === 39) {
             $lightboxCarousel.trigger('next.owl.carousel');
           }
+        }
+      });
+
+      // 當手機旋轉（直向 <-> 橫向）或視窗尺寸改變時，重新校正 Lightbox 輪播尺寸
+      $(window).on('orientationchange resize', function () {
+        if ($('#lightbox').hasClass('show') && $lightboxCarousel.hasClass('owl-loaded')) {
+          setTimeout(function () {
+            $lightboxCarousel.trigger('refresh.owl.carousel');
+          }, 200);
         }
       });
 

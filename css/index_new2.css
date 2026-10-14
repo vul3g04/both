@@ -513,7 +513,7 @@ a:hover {
 	cursor: pointer;
 }
 
-/* Lightbox 樣式 (支援 Owl Carousel 滑動切換) */
+/* Lightbox 樣式 (支援 Owl Carousel 滑動切換與行動裝置動態高度 dvh) */
 .lightbox {
 	display: block;
 	/* 永遠在DOM裡，靠opacity控制顯示 */
@@ -521,8 +521,13 @@ a:hover {
 	z-index: 9999;
 	left: 0;
 	top: 0;
+	right: 0;
+	bottom: 0;
 	width: 100%;
 	height: 100vh;
+	/* 舊瀏覽器 Fallback */
+	height: 100dvh;
+	/* 動態扣除手機網址列與底部手勢導航列 */
 	background-color: rgba(250, 250, 250, 0.96);
 	opacity: 0;
 	pointer-events: none;
@@ -543,37 +548,34 @@ body.lightbox-open {
 	height: 100%;
 }
 
+/* 內層全部改用 100% 繼承 .lightbox 的實際可視高度，避免重複計算 vh 誤差 */
 .lightbox-content {
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 100vw;
-	height: 100vh;
-	max-width: 100%;
-	max-height: 100%;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 	text-align: center;
 }
 
-/* Lightbox 內部 Owl Carousel 滿版置中設定 */
-#lightbox-carousel.owl-carousel {
-	width: 100vw;
-	height: 100vh;
-}
-
+#lightbox-carousel.owl-carousel,
 #lightbox-carousel .owl-stage-outer,
 #lightbox-carousel .owl-stage,
 #lightbox-carousel .owl-item {
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 	background: transparent;
 }
 
 #lightbox-carousel .lightbox-slide {
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	box-sizing: border-box;
+	/* 預留安全邊距，並自動避開手機瀏海與底部手勢區 */
+	padding: env(safe-area-inset-top, 12px) env(safe-area-inset-right, 16px) env(safe-area-inset-bottom, 12px) env(safe-area-inset-left, 16px);
 }
 
 #lightbox-carousel.owl-carousel img {
@@ -581,6 +583,9 @@ body.lightbox-open {
 	height: auto;
 	max-width: 95vw;
 	max-height: 95vh;
+	/* 舊瀏覽器 Fallback */
+	max-height: 92dvh;
+	/* 確保在動態可視範圍內留有上下呼吸空間與陰影空間 */
 	object-fit: contain;
 	border-radius: 4px;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 30px 90px;
@@ -651,13 +656,14 @@ body.lightbox-open {
 
 	#lightbox-carousel.owl-carousel img {
 		max-height: calc(100vh - 180px);
+		max-height: calc(100dvh - 180px);
 	}
 
 	.lightbox-nav.lightbox-prev,
 	.lightbox-nav.lightbox-next {
 		position: fixed;
 		top: auto;
-		bottom: 40px;
+		bottom: calc(40px + env(safe-area-inset-bottom, 0px));
 		transform: none;
 		margin: 0;
 		z-index: 10001;
@@ -671,5 +677,34 @@ body.lightbox-open {
 	.lightbox-nav.lightbox-next {
 		left: 52%;
 		right: auto;
+	}
+}
+
+/* 響應式設計 - 手機與小平板橫向瀏覽模式 (避開網址列與底部手勢條擠壓) */
+@media screen and (max-height: 600px) and (orientation: landscape) {
+	#lightbox-carousel.owl-carousel img {
+		max-width: 88vw;
+		max-height: 88vh;
+		max-height: 88dvh;
+	}
+
+	.lightbox-close {
+		top: 12px;
+		right: calc(16px + env(safe-area-inset-right, 0px));
+		width: 48px;
+		height: 48px;
+	}
+
+	.lightbox-nav {
+		width: 48px;
+		height: 48px;
+	}
+
+	.lightbox-prev {
+		left: calc(16px + env(safe-area-inset-left, 0px));
+	}
+
+	.lightbox-next {
+		right: calc(16px + env(safe-area-inset-right, 0px));
 	}
 }
