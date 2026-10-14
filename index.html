@@ -1,21 +1,27 @@
 <!doctype html>
-<html>
+<html lang="en">
 <!-- 檔案來自GITHUB -->
 
 <head>
   <meta charset="utf-8">
-  <title>BOTH</title>
+  <title>BOTH STUDIO | Visual & Interior Design Studio in Taipei</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="title" content="BOTH" />
-  <meta name="description" content="BOTH is a visual & interior design studio based in Taipei." />
-  <meta name="keywords" content="both,design,web,interior,平面設計,網站設計,室內設計" />
+  <meta name="title" content="BOTH STUDIO" />
+  <meta name="description"
+    content="BOTH is a visual & interior design studio based in Taipei, creating interior, branding and digital design." />
+  <meta name="keywords" content="both,design,web,interior,branding,平面設計,品牌設計,網站設計,室內設計" />
   <meta name="author" content="BOTH STUDIO" />
   <meta name="copyright" content="BOTH STUDIO" />
+
+  <!-- Open Graph -->
   <meta property="og:title" content="BOTH STUDIO" />
-  <meta property="og:type" content="WEBSITE" />
-  <meta property="og:url" content="http://both.ws/" />
-  <meta property="og:image" content="http://both.ws/img/og.jpg" />
+  <meta property="og:description" content="BOTH is a visual & interior design studio based in Taipei." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://both.ws/" />
+  <meta property="og:image" content="https://both.ws/img/og.jpg" />
   <meta property="og:site_name" content="BOTH STUDIO" />
+  <link rel="canonical" href="https://both.ws/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -29,6 +35,28 @@
   <link rel="stylesheet" href="css/lightbox-loading.css">
   <link rel="stylesheet" href="css/owlcarousel/owl.carousel.css">
   <link rel="stylesheet" href="css/owlcarousel/owl.theme.default.css">
+
+  <!-- 結構化資料 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "DesignAgency",
+    "name": "BOTH Studio",
+    "url": "https://both.ws/",
+    "image": "https://both.ws/img/og.jpg",
+    "email": "win@both.ws",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Taipei",
+      "addressCountry": "TW"
+    },
+    "sameAs": [
+      "https://www.instagram.com/both_studio/",
+      "https://tw.creema.net/c/both_studio/item/onsale"
+    ]
+  }
+  </script>
+
   <style type="text/css">
     #loading {
       z-index: 3;
@@ -47,8 +75,8 @@
       display: none;
     }
 
-    /* 顯示前5個work_wrap元素 */
-    .work_wrap:nth-child(-n+5) {
+    /* 顯示前6個work_wrap元素 */
+    .work_wrap:nth-child(-n+6) {
       display: block;
     }
 
@@ -145,9 +173,6 @@
       border-width: 6px;
     }
 
-    /*
- * Animations
- */
     @-webkit-keyframes square-loader {
       0% {
         -webkit-transform: rotate(0deg);
@@ -352,14 +377,15 @@
       100% {
         height: 0;
       }
-
-
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
   <script>
-    $(window).load(function () {
+    var landingStarted = false;
+    function startLandingAnimation() {
+      if (landingStarted) return;
+      landingStarted = true;
       $('.la-square-loader').fadeOut('slow');
       $('#loading').fadeOut('slow');
       $('#landing_text_1').delay(200).animate({ 'top': '25vh', 'opacity': '1' }, 1000, 'easeOutCubic').delay(1000).animate({ 'top': '20vh', 'opacity': '0' }, 1000, 'easeInCubic', function () { $(this).remove(); });
@@ -370,7 +396,12 @@
       $('.fade03').hide(0).delay(3400).fadeIn(1000, 'easeInOutCubic');
       $('.fade04').hide(0).delay(4000).fadeIn(1600, 'easeInOutCubic');
       $('.fade05').hide(0).delay(4600).fadeIn(600, 'easeInOutCubic');
-    })
+    }
+
+    // 正常載入完成時觸發
+    $(window).load(startLandingAnimation);
+    // 安全保護：若外部資源或某張圖卡住超過 3 秒，強制開始進場動畫，避免訪客卡在白畫面
+    setTimeout(startLandingAnimation, 3000);
   </script>
 </head>
 
@@ -412,17 +443,28 @@
       <!--Work_-19 Start-->
       <div class="work_wrap interior">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/residence_t/01.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_t/02.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_t/03.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_t/04.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_t/05.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_t/06.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_t/07.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_t/08.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_t/09.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_t/10.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_t/11.jpg" alt="" /></div>
+          <div><img class="owl-lazy" data-src="img/project/residence_t/01.jpg" alt="Residence T Interior Design 01" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_t/02.jpg" alt="Residence T Interior Design 02" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_t/03.jpg" alt="Residence T Interior Design 03" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_t/04.jpg" alt="Residence T Interior Design 04" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_t/05.jpg" alt="Residence T Interior Design 05" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_t/06.jpg" alt="Residence T Interior Design 06" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_t/07.jpg" alt="Residence T Interior Design 07" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_t/08.jpg" alt="Residence T Interior Design 08" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_t/09.jpg" alt="Residence T Interior Design 09" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_t/10.jpg" alt="Residence T Interior Design 10" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_t/11.jpg" alt="Residence T Interior Design 11" />
+          </div>
         </div>
         <ul class="project_text">
           <li>
@@ -435,7 +477,7 @@
           </li>
           <li>
             <h5 class="mobile_title">See More</h5>
-            <p><a href="residence_t.html" target="_blank">Before/After</a></p>
+            <p><a href="residence_t.html" target="_blank" rel="noopener noreferrer">Before/After</a></p>
           </li>
         </ul>
       </div>
@@ -443,9 +485,12 @@
       <!--Work_-20 Start-->
       <div class="work_wrap branding">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/hae_3/01.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/hae_3/02.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/hae_3/03.jpg" alt="" /></div>
+          <div><img class="owl-lazy" data-src="img/project/hae_3/01.jpg" alt="HAE Branding & Packaging Design 01" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/hae_3/02.jpg" alt="HAE Branding & Packaging Design 02" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/hae_3/03.jpg" alt="HAE Branding & Packaging Design 03" />
+          </div>
         </div>
         <ul class="project_text">
           <li>
@@ -462,9 +507,9 @@
       <!--Work_-18 Start-->
       <div class="work_wrap branding">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/geron/01.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/geron/02.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/geron/03.png" alt="" /></div>
+          <div><img class="owl-lazy" data-src="img/project/geron/01.jpg" alt="Geron Tech Branding Design 01" /></div>
+          <div><img class="owl-lazy" data-src="img/project/geron/02.jpg" alt="Geron Tech Branding Design 02" /></div>
+          <div><img class="owl-lazy" data-src="img/project/geron/03.png" alt="Geron Tech Branding Design 03" /></div>
         </div>
         <ul class="project_text">
           <li>
@@ -477,7 +522,7 @@
           </li>
           <li>
             <h5 class="mobile_title">Co-op</h5>
-            <p><a href="http://kolab-design.com/" target="_blank">KO'LAB</a></p>
+            <p><a href="http://kolab-design.com/" target="_blank" rel="noopener noreferrer">KO'LAB</a></p>
           </li>
         </ul>
       </div>
@@ -485,9 +530,9 @@
       <!--Work_-17 Start-->
       <div class="work_wrap branding">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/hae_4/01.jpg" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/hae_4/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/hae_4/03.jpg" alt="03" /></div>
+          <div><img class="owl-lazy" data-src="img/project/hae_4/01.jpg" alt="HAE Packaging Design 01" /></div>
+          <div><img class="owl-lazy" data-src="img/project/hae_4/02.jpg" alt="HAE Packaging Design 02" /></div>
+          <div><img class="owl-lazy" data-src="img/project/hae_4/03.jpg" alt="HAE Packaging Design 03" /></div>
         </div>
         <ul class="project_text">
           <li>
@@ -504,19 +549,19 @@
       <!--Work_-18 Start-->
       <div class="work_wrap branding">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/cpc/01.png" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/cpc/01.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/cpc/03.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/cpc/05.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/cpc/02.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/cpc/04.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/cpc/06.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/cpc/07.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/cpc/08.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/cpc/09.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/cpc/10.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/cpc/11.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/cpc/12.jpg" alt="" /></div>
+          <div><img class="owl-lazy" data-src="img/project/cpc/01.png" alt="CPC Branding Design 01" /></div>
+          <div><img class="owl-lazy" data-src="img/project/cpc/01.jpg" alt="CPC Branding Design 02" /></div>
+          <div><img class="owl-lazy" data-src="img/project/cpc/03.jpg" alt="CPC Branding Design 03" /></div>
+          <div><img class="owl-lazy" data-src="img/project/cpc/05.jpg" alt="CPC Branding Design 05" /></div>
+          <div><img class="owl-lazy" data-src="img/project/cpc/02.jpg" alt="CPC Branding Design 04" /></div>
+          <div><img class="owl-lazy" data-src="img/project/cpc/04.jpg" alt="CPC Branding Design 06" /></div>
+          <div><img class="owl-lazy" data-src="img/project/cpc/06.jpg" alt="CPC Branding Design 07" /></div>
+          <div><img class="owl-lazy" data-src="img/project/cpc/07.jpg" alt="CPC Branding Design 08" /></div>
+          <div><img class="owl-lazy" data-src="img/project/cpc/08.jpg" alt="CPC Branding Design 09" /></div>
+          <div><img class="owl-lazy" data-src="img/project/cpc/09.jpg" alt="CPC Branding Design 10" /></div>
+          <div><img class="owl-lazy" data-src="img/project/cpc/10.jpg" alt="CPC Branding Design 11" /></div>
+          <div><img class="owl-lazy" data-src="img/project/cpc/11.jpg" alt="CPC Branding Design 12" /></div>
+          <div><img class="owl-lazy" data-src="img/project/cpc/12.jpg" alt="CPC Branding Design 13" /></div>
         </div>
         <ul class="project_text">
           <li>
@@ -529,11 +574,12 @@
           </li>
           <li>
             <h5 class="mobile_title">Co-op</h5>
-            <p><a href="http://kolab-design.com/" target="_blank">KO'LAB</a></p>
+            <p><a href="http://kolab-design.com/" target="_blank" rel="noopener noreferrer">KO'LAB</a></p>
           </li>
           <li>
             <h5 class="mobile_title">Award</h5>
-            <p><a href="https://www.g-mark.org/en/gallery/winners/16943?years=2023" target="_blank">G-MARK</a></p>
+            <p><a href="https://www.g-mark.org/en/gallery/winners/16943?years=2023" target="_blank"
+                rel="noopener noreferrer">G-MARK</a></p>
           </li>
         </ul>
       </div>
@@ -541,15 +587,24 @@
       <!--Work_-19 Start-->
       <div class="work_wrap interior">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/residence_c/01.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_c/02.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_c/03.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_c/04.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_c/05.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_c/06.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_c/07.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_c/08.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_c/09.jpg" alt="" /></div>
+          <div><img class="owl-lazy" data-src="img/project/residence_c/01.jpg" alt="Residence C Interior Design 01" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_c/02.jpg" alt="Residence C Interior Design 02" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_c/03.jpg" alt="Residence C Interior Design 03" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_c/04.jpg" alt="Residence C Interior Design 04" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_c/05.jpg" alt="Residence C Interior Design 05" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_c/06.jpg" alt="Residence C Interior Design 06" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_c/07.jpg" alt="Residence C Interior Design 07" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_c/08.jpg" alt="Residence C Interior Design 08" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_c/09.jpg" alt="Residence C Interior Design 09" />
+          </div>
         </div>
         <ul class="project_text">
           <li>
@@ -562,7 +617,7 @@
           </li>
           <li>
             <h5 class="mobile_title">See More</h5>
-            <p><a href="residence_c.html" target="_blank">Before/After</a></p>
+            <p><a href="residence_c.html" target="_blank" rel="noopener noreferrer">Before/After</a></p>
           </li>
         </ul>
       </div>
@@ -570,10 +625,10 @@
       <!--Work_-17 Start-->
       <div class="work_wrap branding">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/hae_2/01.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/hae_2/02.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/hae_2/03.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/hae_2/05.jpg" alt="" /></div>
+          <div><img class="owl-lazy" data-src="img/project/hae_2/01.jpg" alt="HAE Branding Design 01" /></div>
+          <div><img class="owl-lazy" data-src="img/project/hae_2/02.jpg" alt="HAE Branding Design 02" /></div>
+          <div><img class="owl-lazy" data-src="img/project/hae_2/03.jpg" alt="HAE Branding Design 03" /></div>
+          <div><img class="owl-lazy" data-src="img/project/hae_2/05.jpg" alt="HAE Branding Design 05" /></div>
         </div>
         <ul class="project_text">
           <li>
@@ -590,13 +645,20 @@
       <!--Work_-16 Start-->
       <div class="work_wrap interior">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/residence_b/01.gif" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_b/02.gif" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_b/03.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_b/04.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_b/05.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_b/06.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_b/07.jpg" alt="" /></div>
+          <div><img class="owl-lazy" data-src="img/project/residence_b/01.gif" alt="Residence B Interior Design 01" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_b/02.gif" alt="Residence B Interior Design 02" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_b/03.jpg" alt="Residence B Interior Design 03" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_b/04.jpg" alt="Residence B Interior Design 04" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_b/05.jpg" alt="Residence B Interior Design 05" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_b/06.jpg" alt="Residence B Interior Design 06" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_b/07.jpg" alt="Residence B Interior Design 07" />
+          </div>
         </div>
         <ul class="project_text">
           <li>
@@ -609,7 +671,7 @@
           </li>
           <li>
             <h5 class="mobile_title">See More</h5>
-            <p><a href="residence_b.html" target="_blank">Before/After</a></p>
+            <p><a href="residence_b.html" target="_blank" rel="noopener noreferrer">Before/After</a></p>
           </li>
         </ul>
       </div>
@@ -617,20 +679,34 @@
       <!--Work_-15 Start-->
       <div class="work_wrap interior">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/residence_w/01.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_w/02.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_w/03.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_w/04.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_w/05.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_w/06.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_w/07.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_w/08.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_w/09.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_w/10.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_w/11.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_w/12.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_w/13.jpg" alt="" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_w/14.jpg" alt="" /></div>
+          <div><img class="owl-lazy" data-src="img/project/residence_w/01.jpg" alt="Residence W Interior Design 01" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_w/02.jpg" alt="Residence W Interior Design 02" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_w/03.jpg" alt="Residence W Interior Design 03" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_w/04.jpg" alt="Residence W Interior Design 04" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_w/05.jpg" alt="Residence W Interior Design 05" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_w/06.jpg" alt="Residence W Interior Design 06" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_w/07.jpg" alt="Residence W Interior Design 07" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_w/08.jpg" alt="Residence W Interior Design 08" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_w/09.jpg" alt="Residence W Interior Design 09" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_w/10.jpg" alt="Residence W Interior Design 10" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_w/11.jpg" alt="Residence W Interior Design 11" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_w/12.jpg" alt="Residence W Interior Design 12" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_w/13.jpg" alt="Residence W Interior Design 13" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_w/14.jpg" alt="Residence W Interior Design 14" />
+          </div>
         </div>
         <ul class="project_text">
           <li>
@@ -643,11 +719,11 @@
           </li>
           <li>
             <h5 class="mobile_title">Photo</h5>
-            <p>Ametoki</a></p>
+            <p>Ametoki</p>
           </li>
           <li>
             <h5 class="mobile_title">See More</h5>
-            <p><a href="residence_w.html" target="_blank">Before/After</a></p>
+            <p><a href="residence_w.html" target="_blank" rel="noopener noreferrer">Before/After</a></p>
           </li>
         </ul>
       </div>
@@ -677,7 +753,7 @@
           </li>
           <li>
             <h5 class="mobile_title">Co-op</h5>
-            <p><a href="http://kolab-design.com/" target="_blank">KO'LAB</a></p>
+            <p><a href="http://kolab-design.com/" target="_blank" rel="noopener noreferrer">KO'LAB</a></p>
           </li>
         </ul>
       </div>
@@ -685,12 +761,12 @@
       <!--Work_-13 Start-->
       <div class="work_wrap interior">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/maxon/01.jpg" alt="Maxon Showroom" /></div>
-          <div><img class="owl-lazy" data-src="img/project/maxon/02.jpg" alt="Maxon Showroom" /></div>
-          <div><img class="owl-lazy" data-src="img/project/maxon/03.jpg" alt="Maxon Showroom" /></div>
-          <div><img class="owl-lazy" data-src="img/project/maxon/04.jpg" alt="Maxon Showroom" /></div>
-          <div><img class="owl-lazy" data-src="img/project/maxon/05.jpg" alt="Maxon Showroom" /></div>
-          <div><img class="owl-lazy" data-src="img/project/maxon/06.jpg" alt="Maxon Showroom" /></div>
+          <div><img class="owl-lazy" data-src="img/project/maxon/01.jpg" alt="Maxon Showroom 01" /></div>
+          <div><img class="owl-lazy" data-src="img/project/maxon/02.jpg" alt="Maxon Showroom 02" /></div>
+          <div><img class="owl-lazy" data-src="img/project/maxon/03.jpg" alt="Maxon Showroom 03" /></div>
+          <div><img class="owl-lazy" data-src="img/project/maxon/04.jpg" alt="Maxon Showroom 04" /></div>
+          <div><img class="owl-lazy" data-src="img/project/maxon/05.jpg" alt="Maxon Showroom 05" /></div>
+          <div><img class="owl-lazy" data-src="img/project/maxon/06.jpg" alt="Maxon Showroom 06" /></div>
         </div>
         <ul class="project_text">
           <li>
@@ -699,11 +775,11 @@
           </li>
           <li>
             <h5>Client</h5>
-            <p><a href="https://www.maxongroup.com.tw/" target="_blank">Maxon</a></p>
+            <p><a href="https://www.maxongroup.com.tw/" target="_blank" rel="noopener noreferrer">Maxon</a></p>
           </li>
           <li>
             <h5 class="mobile_title">See More</h5>
-            <p><a href="maxon.html" target="_blank">Before/After</a></p>
+            <p><a href="maxon.html" target="_blank" rel="noopener noreferrer">Before/After</a></p>
           </li>
         </ul>
       </div>
@@ -711,19 +787,32 @@
       <!--Work_-12 Start-->
       <div class="work_wrap interior">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/residence_y/00.jpg" alt="00" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_y/13.gif" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_y/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_y/04.jpg" alt="04" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_y/05.jpg" alt="05" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_y/06.gif" alt="06" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_y/09.jpg" alt="09" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_y/10.jpg" alt="10" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_y/08.jpg" alt="08" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_y/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_y/07.jpg" alt="07" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_y/12.jpg" alt="12" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_y/11.jpg" alt="11" /></div>
+          <div><img class="owl-lazy" data-src="img/project/residence_y/00.jpg" alt="Residence M Interior Design 00" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_y/13.gif" alt="Residence M Interior Design 01" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_y/02.jpg" alt="Residence M Interior Design 02" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_y/04.jpg" alt="Residence M Interior Design 04" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_y/05.jpg" alt="Residence M Interior Design 05" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_y/06.gif" alt="Residence M Interior Design 06" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_y/09.jpg" alt="Residence M Interior Design 09" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_y/10.jpg" alt="Residence M Interior Design 10" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_y/08.jpg" alt="Residence M Interior Design 08" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_y/03.jpg" alt="Residence M Interior Design 03" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_y/07.jpg" alt="Residence M Interior Design 07" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_y/12.jpg" alt="Residence M Interior Design 12" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_y/11.jpg" alt="Residence M Interior Design 11" />
+          </div>
         </div>
         <ul class="project_text">
           <li>
@@ -736,7 +825,7 @@
           </li>
           <li>
             <h5 class="mobile_title">See More</h5>
-            <p><a href="residence_m.html" target="_blank">Before/After</a></p>
+            <p><a href="residence_m.html" target="_blank" rel="noopener noreferrer">Before/After</a></p>
           </li>
         </ul>
       </div>
@@ -757,7 +846,7 @@
           </li>
           <li>
             <h5>Client</h5>
-            <p><a href="http://kolab-design.com/" target="_blank">KO'LAB</a></p>
+            <p><a href="http://kolab-design.com/" target="_blank" rel="noopener noreferrer">KO'LAB</a></p>
           </li>
         </ul>
       </div>
@@ -765,11 +854,11 @@
       <!--Work_-8 Start-->
       <div class="work_wrap branding">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/hae/01.png" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/hae/05.jpg" alt="05" /></div>
-          <div><img class="owl-lazy" data-src="img/project/hae/02.png" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/hae/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/hae/04.jpg" alt="04" /></div>
+          <div><img class="owl-lazy" data-src="img/project/hae/01.png" alt="HAE Branding & Packaging 01" /></div>
+          <div><img class="owl-lazy" data-src="img/project/hae/05.jpg" alt="HAE Branding & Packaging 05" /></div>
+          <div><img class="owl-lazy" data-src="img/project/hae/02.png" alt="HAE Branding & Packaging 02" /></div>
+          <div><img class="owl-lazy" data-src="img/project/hae/03.jpg" alt="HAE Branding & Packaging 03" /></div>
+          <div><img class="owl-lazy" data-src="img/project/hae/04.jpg" alt="HAE Branding & Packaging 04" /></div>
         </div>
         <ul class="project_text">
           <li>
@@ -786,12 +875,18 @@
       <!--Work_-7 Start-->
       <div class="work_wrap interior">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/residence_v/01.jpg" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_v/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_v/04.jpg" alt="04" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_v/05.jpg" alt="05" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_v/06.jpg" alt="06" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_v/07.jpg" alt="07" /></div>
+          <div><img class="owl-lazy" data-src="img/project/residence_v/01.jpg" alt="Residence V Interior Design 01" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_v/02.jpg" alt="Residence V Interior Design 02" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_v/04.jpg" alt="Residence V Interior Design 04" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_v/05.jpg" alt="Residence V Interior Design 05" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_v/06.jpg" alt="Residence V Interior Design 06" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_v/07.jpg" alt="Residence V Interior Design 07" />
+          </div>
         </div>
         <ul class="project_text">
           <li>
@@ -804,7 +899,7 @@
           </li>
           <li>
             <h5 class="mobile_title">See More</h5>
-            <p><a href="residence_v.html" target="_blank">Before/After</a></p>
+            <p><a href="residence_v.html" target="_blank" rel="noopener noreferrer">Before/After</a></p>
           </li>
         </ul>
       </div>
@@ -812,16 +907,26 @@
       <!--Work_-6 Start-->
       <div class="work_wrap others">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/imhere2020/01.jpg" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/imhere2020/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/imhere2020/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/imhere2020/04.jpg" alt="04" /></div>
-          <div><img class="owl-lazy" data-src="img/project/imhere2020/05.jpg" alt="05" /></div>
-          <div><img class="owl-lazy" data-src="img/project/imhere2020/06.jpg" alt="06" /></div>
-          <div><img class="owl-lazy" data-src="img/project/imhere2020/07.jpg" alt="07" /></div>
-          <div><img class="owl-lazy" data-src="img/project/imhere2020/08.jpg" alt="08" /></div>
-          <div><img class="owl-lazy" data-src="img/project/imhere2020/09.jpg" alt="09" /></div>
-          <div><img class="owl-lazy" data-src="img/project/imhere2020/10.jpg" alt="10" /></div>
+          <div><img class="owl-lazy" data-src="img/project/imhere2020/01.jpg" alt="BOTH Studio Own-brand Product 01" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/imhere2020/02.jpg" alt="BOTH Studio Own-brand Product 02" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/imhere2020/03.jpg" alt="BOTH Studio Own-brand Product 03" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/imhere2020/04.jpg" alt="BOTH Studio Own-brand Product 04" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/imhere2020/05.jpg" alt="BOTH Studio Own-brand Product 05" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/imhere2020/06.jpg" alt="BOTH Studio Own-brand Product 06" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/imhere2020/07.jpg" alt="BOTH Studio Own-brand Product 07" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/imhere2020/08.jpg" alt="BOTH Studio Own-brand Product 08" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/imhere2020/09.jpg" alt="BOTH Studio Own-brand Product 09" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/imhere2020/10.jpg" alt="BOTH Studio Own-brand Product 10" />
+          </div>
         </div>
         <ul class="project_text">
           <li>
@@ -831,7 +936,8 @@
           <li>
             <h5>Shop</h5>
             <p>
-              <a href="https://tw.creema.net/c/both_studio/item/onsale" target="_blank">Creema</a>
+              <a href="https://tw.creema.net/c/both_studio/item/onsale" target="_blank"
+                rel="noopener noreferrer">Creema</a>
             </p>
           </li>
         </ul>
@@ -840,11 +946,11 @@
       <!--Work_-5 Start-->
       <div class="work_wrap branding">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/we_logo/04.jpg" alt="04" /></div>
-          <div><img class="owl-lazy" data-src="img/project/we_logo/01.gif" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/we_logo/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/we_logo/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/we_logo/05.jpg" alt="05" /></div>
+          <div><img class="owl-lazy" data-src="img/project/we_logo/04.jpg" alt="Weitronic Branding Design 04" /></div>
+          <div><img class="owl-lazy" data-src="img/project/we_logo/01.gif" alt="Weitronic Branding Design 01" /></div>
+          <div><img class="owl-lazy" data-src="img/project/we_logo/02.jpg" alt="Weitronic Branding Design 02" /></div>
+          <div><img class="owl-lazy" data-src="img/project/we_logo/03.jpg" alt="Weitronic Branding Design 03" /></div>
+          <div><img class="owl-lazy" data-src="img/project/we_logo/05.jpg" alt="Weitronic Branding Design 05" /></div>
         </div>
         <ul class="project_text">
           <li>
@@ -861,12 +967,18 @@
       <!--Work_-4 Start-->
       <div class="work_wrap others">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/we_display/01.jpg" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/we_display/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/we_display/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/we_display/04.jpg" alt="04" /></div>
-          <div><img class="owl-lazy" data-src="img/project/we_display/05.jpg" alt="05" /></div>
-          <div><img class="owl-lazy" data-src="img/project/we_display/06.jpg" alt="06" /></div>
+          <div><img class="owl-lazy" data-src="img/project/we_display/01.jpg" alt="Weitronic Product Display 01" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/we_display/02.jpg" alt="Weitronic Product Display 02" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/we_display/03.jpg" alt="Weitronic Product Display 03" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/we_display/04.jpg" alt="Weitronic Product Display 04" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/we_display/05.jpg" alt="Weitronic Product Display 05" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/we_display/06.jpg" alt="Weitronic Product Display 06" />
+          </div>
         </div>
         <ul class="project_text">
           <li>
@@ -883,15 +995,24 @@
       <!--Work_-3 Start-->
       <div class="work_wrap interior">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/office_w/01.jpg" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/office_w/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/office_w/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/office_w/04.jpg" alt="04" /></div>
-          <div><img class="owl-lazy" data-src="img/project/office_w/05.jpg" alt="05" /></div>
-          <div><img class="owl-lazy" data-src="img/project/office_w/06.jpg" alt="06" /></div>
-          <div><img class="owl-lazy" data-src="img/project/office_w/07.jpg" alt="07" /></div>
-          <div><img class="owl-lazy" data-src="img/project/office_w/08.jpg" alt="08" /></div>
-          <div><img class="owl-lazy" data-src="img/project/office_w/09.jpg" alt="09" /></div>
+          <div><img class="owl-lazy" data-src="img/project/office_w/01.jpg" alt="Weitronic Office Interior Design 01" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/office_w/02.jpg" alt="Weitronic Office Interior Design 02" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/office_w/03.jpg" alt="Weitronic Office Interior Design 03" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/office_w/04.jpg" alt="Weitronic Office Interior Design 04" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/office_w/05.jpg" alt="Weitronic Office Interior Design 05" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/office_w/06.jpg" alt="Weitronic Office Interior Design 06" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/office_w/07.jpg" alt="Weitronic Office Interior Design 07" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/office_w/08.jpg" alt="Weitronic Office Interior Design 08" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/office_w/09.jpg" alt="Weitronic Office Interior Design 09" />
+          </div>
         </div>
         <ul class="project_text">
           <li>
@@ -904,7 +1025,7 @@
           </li>
           <li>
             <h5 class="mobile_title">See More</h5>
-            <p><a href="https://vimeo.com/340397659" target="_blank">Vimeo</a></p>
+            <p><a href="https://vimeo.com/340397659" target="_blank" rel="noopener noreferrer">Vimeo</a></p>
           </li>
         </ul>
       </div>
@@ -912,13 +1033,13 @@
       <!--Work_01 Start-->
       <div class="work_wrap digital">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/asl/01.jpg" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/asl/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/asl/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/asl/04.jpg" alt="04" /></div>
-          <div><img class="owl-lazy" data-src="img/project/asl/05.jpg" alt="05" /></div>
-          <div><img class="owl-lazy" data-src="img/project/asl/06.jpg" alt="06" /></div>
-          <div><img class="owl-lazy" data-src="img/project/asl/07.gif" alt="07" /></div>
+          <div><img class="owl-lazy" data-src="img/project/asl/01.jpg" alt="ASLIS RWD Website Design 01" /></div>
+          <div><img class="owl-lazy" data-src="img/project/asl/02.jpg" alt="ASLIS RWD Website Design 02" /></div>
+          <div><img class="owl-lazy" data-src="img/project/asl/03.jpg" alt="ASLIS RWD Website Design 03" /></div>
+          <div><img class="owl-lazy" data-src="img/project/asl/04.jpg" alt="ASLIS RWD Website Design 04" /></div>
+          <div><img class="owl-lazy" data-src="img/project/asl/05.jpg" alt="ASLIS RWD Website Design 05" /></div>
+          <div><img class="owl-lazy" data-src="img/project/asl/06.jpg" alt="ASLIS RWD Website Design 06" /></div>
+          <div><img class="owl-lazy" data-src="img/project/asl/07.gif" alt="ASLIS RWD Website Design 07" /></div>
         </div>
         <ul class="project_text">
           <li>
@@ -939,13 +1060,20 @@
       <!--Work_-2 Start-->
       <div class="work_wrap branding digital">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/humidry/01.jpg" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/humidry/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/humidry/04.jpg" alt="04" /></div>
-          <div><img class="owl-lazy" data-src="img/project/humidry/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/humidry/05.jpg" alt="05" /></div>
-          <div><img class="owl-lazy" data-src="img/project/humidry/06.jpg" alt="06" /></div>
-          <div><img class="owl-lazy" data-src="img/project/humidry/07.jpg" alt="07" /></div>
+          <div><img class="owl-lazy" data-src="img/project/humidry/01.jpg" alt="Altrason Brochure & UI/UX Design 01" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/humidry/02.jpg" alt="Altrason Brochure & UI/UX Design 02" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/humidry/04.jpg" alt="Altrason Brochure & UI/UX Design 04" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/humidry/03.jpg" alt="Altrason Brochure & UI/UX Design 03" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/humidry/05.jpg" alt="Altrason Brochure & UI/UX Design 05" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/humidry/06.jpg" alt="Altrason Brochure & UI/UX Design 06" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/humidry/07.jpg" alt="Altrason Brochure & UI/UX Design 07" />
+          </div>
         </div>
         <ul class="project_text">
           <li>
@@ -954,7 +1082,7 @@
           </li>
           <li>
             <h5>Client</h5>
-            <p><a href="http://altrason.com/" target="_blank">Altrason</a></p>
+            <p><a href="http://altrason.com/" target="_blank" rel="noopener noreferrer">Altrason</a></p>
           </li>
         </ul>
       </div>
@@ -962,15 +1090,24 @@
       <!--Work_-1 Start-->
       <div class="work_wrap interior">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/residence_p/04.jpg" alt="04" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_p/05.jpg" alt="05" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_p/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_p/06.jpg" alt="06" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_p/01.jpg" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_p/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_p/07.jpg" alt="07" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_p/08.jpg" alt="08" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_p/09.jpg" alt="09" /></div>
+          <div><img class="owl-lazy" data-src="img/project/residence_p/04.jpg" alt="Residence P Interior Design 04" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_p/05.jpg" alt="Residence P Interior Design 05" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_p/03.jpg" alt="Residence P Interior Design 03" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_p/06.jpg" alt="Residence P Interior Design 06" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_p/01.jpg" alt="Residence P Interior Design 01" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_p/02.jpg" alt="Residence P Interior Design 02" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_p/07.jpg" alt="Residence P Interior Design 07" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_p/08.jpg" alt="Residence P Interior Design 08" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_p/09.jpg" alt="Residence P Interior Design 09" />
+          </div>
         </div>
         <ul class="project_text">
           <li>
@@ -987,13 +1124,20 @@
       <!--Work_02 Start-->
       <div class="work_wrap branding digital">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/altrason/01.jpg" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/altrason/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/altrason/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/altrason/04.jpg" alt="04" /></div>
-          <div><img class="owl-lazy" data-src="img/project/altrason/05.jpg" alt="05" /></div>
-          <div><img class="owl-lazy" data-src="img/project/altrason/06.jpg" alt="06" /></div>
-          <div><img class="owl-lazy" data-src="img/project/altrason/07.jpg" alt="07" /></div>
+          <div><img class="owl-lazy" data-src="img/project/altrason/01.jpg"
+              alt="Altrason Branding & Website Design 01" /></div>
+          <div><img class="owl-lazy" data-src="img/project/altrason/02.jpg"
+              alt="Altrason Branding & Website Design 02" /></div>
+          <div><img class="owl-lazy" data-src="img/project/altrason/03.jpg"
+              alt="Altrason Branding & Website Design 03" /></div>
+          <div><img class="owl-lazy" data-src="img/project/altrason/04.jpg"
+              alt="Altrason Branding & Website Design 04" /></div>
+          <div><img class="owl-lazy" data-src="img/project/altrason/05.jpg"
+              alt="Altrason Branding & Website Design 05" /></div>
+          <div><img class="owl-lazy" data-src="img/project/altrason/06.jpg"
+              alt="Altrason Branding & Website Design 06" /></div>
+          <div><img class="owl-lazy" data-src="img/project/altrason/07.jpg"
+              alt="Altrason Branding & Website Design 07" /></div>
         </div>
         <ul class="project_text">
           <li>
@@ -1002,7 +1146,7 @@
           </li>
           <li>
             <h5>Client</h5>
-            <p><a href="http://altrason.com/" target="_blank">Altrason</a></p>
+            <p><a href="http://altrason.com/" target="_blank" rel="noopener noreferrer">Altrason</a></p>
           </li>
         </ul>
       </div>
@@ -1010,12 +1154,18 @@
       <!--Work_-2 Start-->
       <div class="work_wrap interior">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/residence_l/01.jpg" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_l/02.gif" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_l/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_l/04.jpg" alt="04" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_l/05.jpg" alt="05" /></div>
-          <div><img class="owl-lazy" data-src="img/project/residence_l/06.jpg" alt="06" /></div>
+          <div><img class="owl-lazy" data-src="img/project/residence_l/01.jpg" alt="Residence L Interior Design 01" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_l/02.gif" alt="Residence L Interior Design 02" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_l/03.jpg" alt="Residence L Interior Design 03" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_l/04.jpg" alt="Residence L Interior Design 04" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_l/05.jpg" alt="Residence L Interior Design 05" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/residence_l/06.jpg" alt="Residence L Interior Design 06" />
+          </div>
         </div>
         <ul class="project_text">
           <li>
@@ -1036,9 +1186,9 @@
       <!--Work_03 Start-->
       <div class="work_wrap branding">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/xhorse/01.jpg" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/xhorse/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/xhorse/03.jpg" alt="03" /></div>
+          <div><img class="owl-lazy" data-src="img/project/xhorse/01.jpg" alt="X horse Branding Design 01" /></div>
+          <div><img class="owl-lazy" data-src="img/project/xhorse/02.jpg" alt="X horse Branding Design 02" /></div>
+          <div><img class="owl-lazy" data-src="img/project/xhorse/03.jpg" alt="X horse Branding Design 03" /></div>
         </div>
         <ul class="project_text">
           <li>
@@ -1055,11 +1205,11 @@
       <!--Work_12 Start-->
       <div class="work_wrap others">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/both_bag/01.jpg" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/both_bag/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/both_bag/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/both_bag/04.jpg" alt="04" /></div>
-          <div><img class="owl-lazy" data-src="img/project/both_bag/05.jpg" alt="05" /></div>
+          <div><img class="owl-lazy" data-src="img/project/both_bag/01.jpg" alt="BOTH Studio Bag Product 01" /></div>
+          <div><img class="owl-lazy" data-src="img/project/both_bag/02.jpg" alt="BOTH Studio Bag Product 02" /></div>
+          <div><img class="owl-lazy" data-src="img/project/both_bag/03.jpg" alt="BOTH Studio Bag Product 03" /></div>
+          <div><img class="owl-lazy" data-src="img/project/both_bag/04.jpg" alt="BOTH Studio Bag Product 04" /></div>
+          <div><img class="owl-lazy" data-src="img/project/both_bag/05.jpg" alt="BOTH Studio Bag Product 05" /></div>
         </div>
         <ul class="project_text">
           <li>
@@ -1076,13 +1226,20 @@
       <!--Work_08 Start-->
       <div class="work_wrap interior">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/recycle_shop/01.jpg" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/recycle_shop/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/recycle_shop/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/recycle_shop/04.jpg" alt="04" /></div>
-          <div><img class="owl-lazy" data-src="img/project/recycle_shop/05.jpg" alt="05" /></div>
-          <div><img class="owl-lazy" data-src="img/project/recycle_shop/06.jpg" alt="06" /></div>
-          <div><img class="owl-lazy" data-src="img/project/recycle_shop/07.jpg" alt="07" /></div>
+          <div><img class="owl-lazy" data-src="img/project/recycle_shop/01.jpg"
+              alt="Re:Cycle Shop Interior Design 01" /></div>
+          <div><img class="owl-lazy" data-src="img/project/recycle_shop/02.jpg"
+              alt="Re:Cycle Shop Interior Design 02" /></div>
+          <div><img class="owl-lazy" data-src="img/project/recycle_shop/03.jpg"
+              alt="Re:Cycle Shop Interior Design 03" /></div>
+          <div><img class="owl-lazy" data-src="img/project/recycle_shop/04.jpg"
+              alt="Re:Cycle Shop Interior Design 04" /></div>
+          <div><img class="owl-lazy" data-src="img/project/recycle_shop/05.jpg"
+              alt="Re:Cycle Shop Interior Design 05" /></div>
+          <div><img class="owl-lazy" data-src="img/project/recycle_shop/06.jpg"
+              alt="Re:Cycle Shop Interior Design 06" /></div>
+          <div><img class="owl-lazy" data-src="img/project/recycle_shop/07.jpg"
+              alt="Re:Cycle Shop Interior Design 07" /></div>
         </div>
         <ul class="project_text">
           <li>
@@ -1091,7 +1248,8 @@
           </li>
           <li>
             <h5>Client</h5>
-            <p><a href="https://www.facebook.com/recycleleathercraft/" target="_blank">Re:Cycle</a></p>
+            <p><a href="https://www.facebook.com/recycleleathercraft/" target="_blank"
+                rel="noopener noreferrer">Re:Cycle</a></p>
           </li>
           <li>
             <h5>Co-op</h5>
@@ -1103,14 +1261,22 @@
       <!--Work_09 Start-->
       <div class="work_wrap branding">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/recycle_grahic/01.jpg" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/recycle_grahic/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/recycle_grahic/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/recycle_grahic/04.jpg" alt="04" /></div>
-          <div><img class="owl-lazy" data-src="img/project/recycle_grahic/05.jpg" alt="05" /></div>
-          <div><img class="owl-lazy" data-src="img/project/recycle_grahic/06.jpg" alt="06" /></div>
-          <div><img class="owl-lazy" data-src="img/project/recycle_grahic/07.gif" alt="07" /></div>
-          <div><img class="owl-lazy" data-src="img/project/recycle_grahic/08.jpg" alt="08" /></div>
+          <div><img class="owl-lazy" data-src="img/project/recycle_grahic/01.jpg"
+              alt="Re:Cycle Branding & Photography 01" /></div>
+          <div><img class="owl-lazy" data-src="img/project/recycle_grahic/02.jpg"
+              alt="Re:Cycle Branding & Photography 02" /></div>
+          <div><img class="owl-lazy" data-src="img/project/recycle_grahic/03.jpg"
+              alt="Re:Cycle Branding & Photography 03" /></div>
+          <div><img class="owl-lazy" data-src="img/project/recycle_grahic/04.jpg"
+              alt="Re:Cycle Branding & Photography 04" /></div>
+          <div><img class="owl-lazy" data-src="img/project/recycle_grahic/05.jpg"
+              alt="Re:Cycle Branding & Photography 05" /></div>
+          <div><img class="owl-lazy" data-src="img/project/recycle_grahic/06.jpg"
+              alt="Re:Cycle Branding & Photography 06" /></div>
+          <div><img class="owl-lazy" data-src="img/project/recycle_grahic/07.gif"
+              alt="Re:Cycle Branding & Photography 07" /></div>
+          <div><img class="owl-lazy" data-src="img/project/recycle_grahic/08.jpg"
+              alt="Re:Cycle Branding & Photography 08" /></div>
         </div>
         <ul class="project_text">
           <li>
@@ -1119,7 +1285,8 @@
           </li>
           <li>
             <h5>Client</h5>
-            <p><a href="https://www.facebook.com/recycleleathercraft/" target="_blank">Re:Cycle</a></p>
+            <p><a href="https://www.facebook.com/recycleleathercraft/" target="_blank"
+                rel="noopener noreferrer">Re:Cycle</a></p>
           </li>
         </ul>
       </div>
@@ -1127,15 +1294,24 @@
       <!--Work_10 Start-->
       <div class="work_wrap digital">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/otisan_powerbank/00.gif" alt="00" /></div>
-          <div><img class="owl-lazy" data-src="img/project/otisan_powerbank/01.jpg" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/otisan_powerbank/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/otisan_powerbank/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/otisan_powerbank/04.jpg" alt="04" /></div>
-          <div><img class="owl-lazy" data-src="img/project/otisan_powerbank/05.jpg" alt="05" /></div>
-          <div><img class="owl-lazy" data-src="img/project/otisan_powerbank/06.jpg" alt="06" /></div>
-          <div><img class="owl-lazy" data-src="img/project/otisan_4port/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/otisan_4port/05.jpg" alt="05" /></div>
+          <div><img class="owl-lazy" data-src="img/project/otisan_powerbank/00.gif"
+              alt="Otisan Product & Website Design 00" /></div>
+          <div><img class="owl-lazy" data-src="img/project/otisan_powerbank/01.jpg"
+              alt="Otisan Product & Website Design 01" /></div>
+          <div><img class="owl-lazy" data-src="img/project/otisan_powerbank/02.jpg"
+              alt="Otisan Product & Website Design 02" /></div>
+          <div><img class="owl-lazy" data-src="img/project/otisan_powerbank/03.jpg"
+              alt="Otisan Product & Website Design 03" /></div>
+          <div><img class="owl-lazy" data-src="img/project/otisan_powerbank/04.jpg"
+              alt="Otisan Product & Website Design 04" /></div>
+          <div><img class="owl-lazy" data-src="img/project/otisan_powerbank/05.jpg"
+              alt="Otisan Product & Website Design 05" /></div>
+          <div><img class="owl-lazy" data-src="img/project/otisan_powerbank/06.jpg"
+              alt="Otisan Product & Website Design 06" /></div>
+          <div><img class="owl-lazy" data-src="img/project/otisan_4port/03.jpg" alt="Otisan 4-Port Product Design 03" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/otisan_4port/05.jpg" alt="Otisan 4-Port Product Design 05" />
+          </div>
         </div>
         <ul class="project_text">
           <li>
@@ -1152,11 +1328,16 @@
       <!--Work_11 Start-->
       <div class="work_wrap branding">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/lr_logo/01.jpg" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/lr_logo/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/lr_logo/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/lr_logo/04.jpg" alt="04" /></div>
-          <div><img class="owl-lazy" data-src="img/project/lr_logo/05.jpg" alt="05" /></div>
+          <div><img class="owl-lazy" data-src="img/project/lr_logo/01.jpg"
+              alt="Life Rosetta Branding & Stationery 01" /></div>
+          <div><img class="owl-lazy" data-src="img/project/lr_logo/02.jpg"
+              alt="Life Rosetta Branding & Stationery 02" /></div>
+          <div><img class="owl-lazy" data-src="img/project/lr_logo/03.jpg"
+              alt="Life Rosetta Branding & Stationery 03" /></div>
+          <div><img class="owl-lazy" data-src="img/project/lr_logo/04.jpg"
+              alt="Life Rosetta Branding & Stationery 04" /></div>
+          <div><img class="owl-lazy" data-src="img/project/lr_logo/05.jpg"
+              alt="Life Rosetta Branding & Stationery 05" /></div>
         </div>
         <ul class="project_text">
           <li>
@@ -1173,12 +1354,18 @@
       <!--Work_06 Start-->
       <div class="work_wrap branding">
         <div class="owl-carousel owl-theme">
-          <div><img class="owl-lazy" data-src="img/project/lr_brochure/01.jpg" alt="01" /></div>
-          <div><img class="owl-lazy" data-src="img/project/lr_brochure/02.jpg" alt="02" /></div>
-          <div><img class="owl-lazy" data-src="img/project/lr_brochure/03.jpg" alt="03" /></div>
-          <div><img class="owl-lazy" data-src="img/project/lr_brochure/04.jpg" alt="04" /></div>
-          <div><img class="owl-lazy" data-src="img/project/lr_brochure/05.jpg" alt="05" /></div>
-          <div><img class="owl-lazy" data-src="img/project/lr_brochure/06.jpg" alt="06" /></div>
+          <div><img class="owl-lazy" data-src="img/project/lr_brochure/01.jpg" alt="Life Rosetta Brochure Design 01" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/lr_brochure/02.jpg" alt="Life Rosetta Brochure Design 02" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/lr_brochure/03.jpg" alt="Life Rosetta Brochure Design 03" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/lr_brochure/04.jpg" alt="Life Rosetta Brochure Design 04" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/lr_brochure/05.jpg" alt="Life Rosetta Brochure Design 05" />
+          </div>
+          <div><img class="owl-lazy" data-src="img/project/lr_brochure/06.jpg" alt="Life Rosetta Brochure Design 06" />
+          </div>
         </div>
         <ul class="project_text">
           <li>
@@ -1230,10 +1417,11 @@
         <h2>CONTACT</h2>
         <p class="pc_hide">Great things always begin from "HI!"</p>
         <ul>
-          <li class="pc_hide"><a href="https://line.me/ti/p/nD8wxlwIlD"><img src="img/circle_line.svg" /></a>
+          <li class="pc_hide"><a href="https://line.me/ti/p/nD8wxlwIlD" target="_blank" rel="noopener noreferrer"><img
+                src="img/circle_line.svg" alt="Line" /></a>
             <p>winwin.lai</p>
           </li>
-          <li class="pc_hide"><a href="mailto:win@both.ws"><img src="img/circle_mail.svg" /></a>
+          <li class="pc_hide"><a href="mailto:win@both.ws"><img src="img/circle_mail.svg" alt="Email" /></a>
             <p>win@both.ws</p>
           </li>
         </ul>
@@ -1241,8 +1429,9 @@
       </div>
       <div class="contact">
         <h2>FOLLOW</h2>
-        <p><a href="https://www.instagram.com/both_studio/" target="_blank">Instagram</a></p>
-        <p><a href="https://tw.creema.net/c/both_studio/item/onsale" target="_blank">Online Shop</a></p>
+        <p><a href="https://www.instagram.com/both_studio/" target="_blank" rel="noopener noreferrer">Instagram</a></p>
+        <p><a href="https://tw.creema.net/c/both_studio/item/onsale" target="_blank" rel="noopener noreferrer">Online
+            Shop</a></p>
       </div>
       <div id="copyright">
         <p>© 2026 BOTH Studio</p>
@@ -1255,25 +1444,21 @@
   <div id="lightbox" class="lightbox">
     <div class="lightbox-close"></div>
     <div class="lightbox-content">
-      <img id="lightbox-img" src="" alt="">
-      <div class="lightbox-loading">
-        <div class="loading-spinner"></div>
-      </div>
+      <div id="lightbox-carousel" class="owl-carousel"></div>
     </div>
     <div class="lightbox-nav lightbox-prev"></div>
     <div class="lightbox-nav lightbox-next"></div>
   </div>
 
+  <script src="js/owl.carousel.js"></script>
+
+  <!-- Lightbox 互動邏輯 (Owl Carousel 滑動版) -->
   <script>
     $(document).ready(function () {
-      // Lightbox 功能
-      var currentImageIndex = 0;
-      var currentCarousel = null;
-      var allImages = [];
+      var $lightboxCarousel = $('#lightbox-carousel');
 
       // 從圖片路徑中提取專案名稱
       function getProjectNameFromPath(imagePath) {
-        // 路徑格式: img/project/project_name/01.jpg
         var match = imagePath.match(/img\/project\/([^\/]+)\//);
         return match ? match[1] : null;
       }
@@ -1287,7 +1472,6 @@
 
       // 清除網址 hash
       function clearUrlHash() {
-        // 使用 pushState 以便瀏覽器能正確追蹤狀態變更
         history.pushState(null, null, window.location.pathname + window.location.search);
       }
 
@@ -1295,262 +1479,186 @@
       function getProjectFromHash() {
         var hash = window.location.hash;
         if (hash && hash.indexOf('#project=') === 0) {
-          return hash.substring(9); // 移除 '#project=' 前綴
+          return hash.substring(9);
         }
         return null;
       }
 
       // 獲取真實圖片（排除複製的項目）
       function getRealImages($carousel) {
-        // Owl Carousel 會複製項目用於無限循環，我們需要排除這些 (.cloned)
-        // 找出所有 .owl-item 但不是 .cloned 的項目中的圖片
         var $realItems = $carousel.find('.owl-item:not(.cloned) img');
-
-        // 如果找不到 owl-item (可能尚未初始化)，則回傳所有圖片
         if ($realItems.length === 0) {
           return $carousel.find('img');
         }
-
         return $realItems;
       }
 
-      // 根據專案名稱找到對應的 carousel 並開啟 lightbox
-      function openLightboxByProjectName(projectName) {
-        // 找到包含該專案圖片的 carousel
-        var $targetCarousel = null;
-        var $targetImg = null;
-
-        $('.owl-carousel').each(function () {
-          var $carousel = $(this);
-          // 使用真實圖片列表來尋找
-          var $realImages = getRealImages($carousel);
-          var $firstImg = $realImages.first();
-
-          if ($firstImg.length > 0) {
-            var imgPath = $firstImg.attr('data-src') || $firstImg.attr('src');
-
-            if (imgPath) {
-              var carouselProjectName = getProjectNameFromPath(imgPath);
-              if (carouselProjectName === projectName) {
-                $targetCarousel = $carousel;
-                $targetImg = $firstImg;
-                return false; // 跳出 each 迴圈
-              }
-            }
-          }
-        });
-
-        if ($targetCarousel && $targetImg) {
-          // 只獲取真實圖片列表
-          var $realImages = getRealImages($targetCarousel);
-
-          // 確保使用第一張真實圖片
-          $targetImg = $realImages.first();
-
-          currentImageIndex = 0;
-          currentCarousel = $targetCarousel;
-          allImages = $realImages;
-
-          var imageSrc = $targetImg.attr('data-src') || $targetImg.attr('src');
-
-          // 如果圖片還沒有加載，先加載再顯示
-          if ($targetImg.attr('data-src') && !$targetImg.attr('src')) {
-            $targetImg.attr('src', imageSrc);
-          }
-
-          // 顯示 lightbox
-          showLightbox(imageSrc, projectName);
-        }
+      // 計算 scrollbar 寬度
+      function getScrollbarWidth() {
+        return window.innerWidth - document.documentElement.clientWidth;
       }
 
-      // 為所有owl-carousel中的圖片添加點擊事件
-      $(document).on('click', '.owl-carousel img', function (e) {
-        e.preventDefault();
+      // 顯示 Lightbox 並初始化內部的 Owl Carousel
+      function showLightbox($realImages, startIndex, projectName) {
+        var scrollPosition = window.pageYOffset;
 
-        var $clickedImg = $(this);
-        var $carousel = $clickedImg.closest('.owl-carousel');
+        // 若之前已經初始化過，先銷毀舊實例並清空內容
+        if ($lightboxCarousel.hasClass('owl-loaded')) {
+          $lightboxCarousel.trigger('destroy.owl.carousel');
+        }
+        $lightboxCarousel.empty();
 
-        // 獲取真實圖片列表
-        var $realImages = getRealImages($carousel);
-
-        // 獲取圖片源（處理lazy loading）
-        var imageSrc = $clickedImg.attr('data-src') || $clickedImg.attr('src');
-
-        // 在真實圖片列表中尋找點擊圖片的索引（比對 src）
-        // 因為點擊的可能是 cloned 的圖片，所以不能直接用 index($clickedImg)
-        var clickedIndex = -1;
-
-        $realImages.each(function (index) {
+        // 將該專案的所有圖片塞入 Lightbox 輪播容器
+        $realImages.each(function () {
           var $img = $(this);
           var src = $img.attr('data-src') || $img.attr('src');
-          if (src === imageSrc) {
-            clickedIndex = index;
-            return false; // Found
+          var alt = $img.attr('alt') || '';
+          if ($img.attr('data-src') && !$img.attr('src')) {
+            $img.attr('src', src);
           }
+          $lightboxCarousel.append(
+            '<div class="lightbox-slide"><img class="owl-lazy" data-src="' + src + '" alt="' + alt + '" /></div>'
+          );
         });
 
-        if (clickedIndex === -1) {
-          // 如果真的找不到，就預設為 0
-          clickedIndex = 0;
-        }
-
-        currentImageIndex = clickedIndex;
-        currentCarousel = $carousel;
-        allImages = $realImages;
-
-        // 如果圖片還沒有加載，先加載再顯示
-        if ($clickedImg.attr('data-src') && !$clickedImg.attr('src')) {
-          $clickedImg.attr('src', imageSrc);
-        }
-
-        // 從圖片路徑獲取專案名稱並更新網址
-        var projectName = getProjectNameFromPath(imageSrc);
-
-        // 顯示lightbox
-        showLightbox(imageSrc, projectName);
-      });
-
-      // 顯示lightbox
-      function showLightbox(imageSrc, projectName) {
-        var scrollPosition = window.pageYOffset;
+        // 打開 Lightbox 外層並鎖定背景滾動
         $('#lightbox').addClass('show');
         $('body')
           .addClass('lightbox-open')
           .css('padding-right', getScrollbarWidth() + 'px')
-          .css('top', -scrollPosition + 'px');
-        $('body').data('scroll-position', scrollPosition);
+          .css('top', -scrollPosition + 'px')
+          .data('scroll-position', scrollPosition);
 
-        // 更新網址 hash
         if (projectName) {
           updateUrlHash(projectName);
         }
 
-        // 使用圖片切換函數來載入第一張圖片
-        switchImage(imageSrc);
+        // 初始化 Lightbox 內的 Owl Carousel
+        $lightboxCarousel.on('initialized.owl.carousel refreshed.owl.carousel', function () {
+          $(this).find('.owl-item.cloned').attr('aria-hidden', 'true');
+        }).owlCarousel({
+          items: 1,
+          loop: $realImages.length > 1,
+          nav: false,
+          dots: false,
+          lazyLoad: true,
+          startPosition: startIndex,
+          smartSpeed: 350,
+          mouseDrag: $realImages.length > 1,
+          touchDrag: $realImages.length > 1
+        });
       }
 
-      // 隱藏lightbox
+      // 隱藏 Lightbox
       function hideLightbox() {
         var scrollPosition = $('body').data('scroll-position');
         $('#lightbox').removeClass('show');
-        $('.lightbox-loading').removeClass('show'); // 確保loading被隱藏
         $('body')
           .removeClass('lightbox-open')
           .css('padding-right', '')
           .css('top', '');
         window.scrollTo(0, scrollPosition);
 
-        // 清除網址 hash
         clearUrlHash();
       }
 
-      // 計算scrollbar寬度
-      function getScrollbarWidth() {
-        return window.innerWidth - document.documentElement.clientWidth;
-      }
+      // 根據專案名稱找到對應的 carousel 並開啟 lightbox
+      function openLightboxByProjectName(projectName) {
+        var $targetCarousel = null;
 
-      // 切換圖片時顯示loading
-      function switchImage(imageSrc) {
-        // 顯示loading並隱藏當前圖片
-        $('.lightbox-loading').addClass('show');
-        $('#lightbox-img').css('opacity', '0');
+        $('#ourHolder .owl-carousel').each(function () {
+          var $carousel = $(this);
+          var $realImages = getRealImages($carousel);
+          var $firstImg = $realImages.first();
 
-        // 預載新圖片
-        var img = new Image();
-        img.onload = function () {
-          // 圖片已載入，可以進行切換
-          $('#lightbox-img').attr('src', imageSrc);
-
-          // 確保DOM更新後再進行顯示
-          requestAnimationFrame(function () {
-            $('.lightbox-loading').removeClass('show');
-            $('#lightbox-img').css('opacity', '1');
-          });
-        };
-        img.src = imageSrc;
-      }
-
-      // 顯示下一張圖片
-      function showNextImage() {
-        if (allImages.length > 1) {
-          currentImageIndex = (currentImageIndex + 1) % allImages.length;
-          var nextImg = allImages.eq(currentImageIndex);
-          var nextSrc = nextImg.attr('data-src') || nextImg.attr('src');
-
-          // 如果圖片還沒有加載，先加載
-          if (nextImg.attr('data-src') && !nextImg.attr('src')) {
-            nextImg.attr('src', nextSrc);
+          if ($firstImg.length > 0) {
+            var imgPath = $firstImg.attr('data-src') || $firstImg.attr('src');
+            if (imgPath && getProjectNameFromPath(imgPath) === projectName) {
+              $targetCarousel = $carousel;
+              return false;
+            }
           }
+        });
 
-          switchImage(nextSrc);
+        if ($targetCarousel) {
+          var $realImages = getRealImages($targetCarousel);
+          showLightbox($realImages, 0, projectName);
         }
       }
 
-      // 顯示上一張圖片
-      function showPrevImage() {
-        if (allImages.length > 1) {
-          currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
-          var prevImg = allImages.eq(currentImageIndex);
-          var prevSrc = prevImg.attr('data-src') || prevImg.attr('src');
+      // 點擊作品集中的圖片開啟 Lightbox
+      $(document).on('click', '#ourHolder .owl-carousel img', function (e) {
+        e.preventDefault();
 
-          // 如果圖片還沒有加載，先加載
-          if (prevImg.attr('data-src') && !prevImg.attr('src')) {
-            prevImg.attr('src', prevSrc);
+        var $clickedImg = $(this);
+        var $carousel = $clickedImg.closest('.owl-carousel');
+        var $realImages = getRealImages($carousel);
+        var imageSrc = $clickedImg.attr('data-src') || $clickedImg.attr('src');
+        var clickedIndex = 0;
+
+        $realImages.each(function (index) {
+          var src = $(this).attr('data-src') || $(this).attr('src');
+          if (src === imageSrc) {
+            clickedIndex = index;
+            return false;
           }
+        });
 
-          switchImage(prevSrc);
-        }
-      }
+        var projectName = getProjectNameFromPath(imageSrc);
+        showLightbox($realImages, clickedIndex, projectName);
+      });
 
-      // 關閉lightbox
+      // 下一張 / 上一張按鈕
+      $('.lightbox-next').click(function (e) {
+        e.stopPropagation();
+        $lightboxCarousel.trigger('next.owl.carousel');
+      });
+
+      $('.lightbox-prev').click(function (e) {
+        e.stopPropagation();
+        $lightboxCarousel.trigger('prev.owl.carousel');
+      });
+
+      // 關閉按鈕
       $('.lightbox-close').click(function () {
         hideLightbox();
       });
 
-      // 點擊lightbox背景關閉
-      $('#lightbox').click(function (e) {
-        if (e.target === this) {
+      // 點擊 Lightbox 空白背景處關閉（排除拖曳滑動手勢與點擊圖片本身）
+      var isDraggingLightbox = false;
+      $lightboxCarousel.on('drag.owl.carousel', function () {
+        isDraggingLightbox = true;
+      });
+      $lightboxCarousel.on('translated.owl.carousel', function () {
+        setTimeout(function () {
+          isDraggingLightbox = false;
+        }, 50);
+      });
+
+      $('#lightbox').on('click', function (e) {
+        if (isDraggingLightbox) {
+          isDraggingLightbox = false;
+          return;
+        }
+        if (!$(e.target).is('img') && $(e.target).closest('.lightbox-nav, .lightbox-close').length === 0) {
           hideLightbox();
         }
       });
 
-      // ESC鍵關閉lightbox
+      // 鍵盤控制（ESC 關閉、左右方向鍵滑動）
       $(document).keydown(function (e) {
-        if (e.key === 'Escape' && $('#lightbox').hasClass('show')) {
-          hideLightbox();
-        }
-      });
-
-      // 下一張圖片
-      $('.lightbox-next').click(function (e) {
-        e.stopPropagation();
-        showNextImage();
-      });
-
-      // 上一張圖片
-      $('.lightbox-prev').click(function (e) {
-        e.stopPropagation();
-        showPrevImage();
-      });
-
-      // 鍵盤控制
-      $(document).keydown(function (e) {
-        if ($('#lightbox').is(':visible')) {
-          switch (e.keyCode) {
-            case 27: // ESC鍵
-              hideLightbox();
-              break;
-            case 37: // 左箭頭
-              showPrevImage();
-              break;
-            case 39: // 右箭頭
-              showNextImage();
-              break;
+        if ($('#lightbox').hasClass('show')) {
+          if (e.key === 'Escape' || e.keyCode === 27) {
+            hideLightbox();
+          } else if (e.key === 'ArrowLeft' || e.keyCode === 37) {
+            $lightboxCarousel.trigger('prev.owl.carousel');
+          } else if (e.key === 'ArrowRight' || e.keyCode === 39) {
+            $lightboxCarousel.trigger('next.owl.carousel');
           }
         }
       });
 
-      // 頁面載入時檢查網址 hash，如果有專案名稱則自動開啟 lightbox
+      // 頁面載入與網址 Hash 連動檢查
       function checkAndOpenFromHash() {
         var projectFromHash = getProjectFromHash();
         if (projectFromHash && !$('#lightbox').hasClass('show')) {
@@ -1558,16 +1666,13 @@
         }
       }
 
-      // 監聽 hashchange 事件（處理同一頁面內網址 hash 變更）
       $(window).on('hashchange', function () {
         checkAndOpenFromHash();
       });
 
-      // 頁面完全載入後檢查 hash（使用 window.load 確保所有資源都已載入）
       $(window).on('load', function () {
         var projectFromHash = getProjectFromHash();
         if (projectFromHash) {
-          // 等待 owl-carousel 初始化完成後再開啟 lightbox
           setTimeout(function () {
             checkAndOpenFromHash();
           }, 100);
@@ -1575,87 +1680,137 @@
       });
     });
   </script>
+
+  <!-- Filter、滾動分批載入與動態初始化 Owl Carousel -->
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var batchSize = 6;         // 每次載入數量
+      var visibleCount = 6;      // 目前已顯示的數量（初始為 6）
+      var isFiltered = false;    // 是否處於分類篩選狀態（非 ALL）
+      var isAnimating = false;   // 防止淡入淡出期間重複觸發
+      var $allWorks = $('#ourHolder').children('div.work_wrap');
+
+      // 封裝：只針對尚未初始化的區塊啟動 Owl Carousel，並將克隆節點設為 aria-hidden
+      function initCarousel($wrappers) {
+        $wrappers.each(function () {
+          var $carousel = $(this).find('.owl-carousel');
+          if (!$carousel.hasClass('owl-loaded')) {
+            $carousel.on('initialized.owl.carousel refreshed.owl.carousel', function () {
+              $(this).find('.owl-item.cloned').attr('aria-hidden', 'true');
+            }).owlCarousel({
+              nav: true,
+              loop: true,
+              margin: 1,
+              lazyLoad: true,
+              stagePadding: 0,
+              responsive: {
+                0: {
+                  items: 1
+                },
+                1000: {
+                  items: 1.15
+                }
+              }
+            });
+          } else {
+            $carousel.trigger('refresh.owl.carousel');
+          }
+        });
+      }
+
+      // 1. 首次載入：只顯示並初始化前 6 個 project
+      $allWorks.hide();
+      var $initialWorks = $allWorks.slice(0, visibleCount);
+      $initialWorks.show();
+      initCarousel($initialWorks);
+
+      // 2. 滾動載入下 6 個（僅在 ALL 模式且尚未全部顯示時觸發）
+      function loadMoreItems() {
+        if (isFiltered || isAnimating || visibleCount >= $allWorks.length) {
+          return;
+        }
+
+        var nextCount = visibleCount + batchSize;
+        var $nextBatch = $allWorks.slice(visibleCount, nextCount);
+
+        if ($nextBatch.length > 0) {
+          isAnimating = true;
+          $nextBatch.css('opacity', 0).show();
+          initCarousel($nextBatch);
+
+          $nextBatch.animate({ opacity: 1 }, 500, 'easeInOutCubic', function () {
+            $(this).css('opacity', '');
+            isAnimating = false;
+          });
+
+          visibleCount = nextCount;
+        }
+      }
+
+      // 監聽視窗滾動事件
+      $(window).on('scroll', function () {
+        if (!isFiltered && visibleCount < $allWorks.length) {
+          if ($(window).scrollTop() + $(window).height() >= $(document).height() - 300) {
+            loadMoreItems();
+          }
+        }
+      });
+
+      // 3 & 4. 點擊 Project Filter：淡出當前作品 -> 載入並淡入目標作品
+      $('#filterOptions li a').on('click', function (e) {
+        e.preventDefault();
+
+        var $this = $(this);
+        var $parentLi = $this.parent();
+
+        if ($parentLi.hasClass('active') || isAnimating) {
+          return false;
+        }
+
+        var ourClass = $this.attr('class');
+
+        $('#filterOptions li').removeClass('active');
+        $parentLi.addClass('active');
+
+        isAnimating = true;
+
+        var $targetWorks;
+        if (ourClass === 'all') {
+          isFiltered = false;
+          visibleCount = batchSize;
+          $targetWorks = $allWorks.slice(0, visibleCount);
+        } else {
+          isFiltered = true;
+          $targetWorks = $allWorks.filter('.' + ourClass);
+        }
+
+        var $currentlyVisible = $allWorks.filter(':visible');
+
+        function fadeInTargets() {
+          $targetWorks.css('opacity', 0).show();
+          initCarousel($targetWorks);
+
+          $targetWorks.animate({ opacity: 1 }, 400, 'easeInOutCubic', function () {
+            $(this).css('opacity', '');
+          });
+
+          setTimeout(function () {
+            isAnimating = false;
+          }, 420);
+        }
+
+        if ($currentlyVisible.length > 0) {
+          $currentlyVisible.stop(true, true).fadeOut(300, 'easeInOutCubic').promise().done(function () {
+            fadeInTargets();
+          });
+        } else {
+          fadeInTargets();
+        }
+
+        return false;
+      });
+    });
+  </script>
 </body>
-<script src="js/owl.carousel.js"></script>
-<script src="js/owl.lazyload.js"></script>
-
-<!--Filter-->
-<script type="text/javascript">
-  $(document).ready(function () {
-    // 初始化變數
-    // 所有作品一次性顯示，不需要分批載入
-    var isFiltered = false; // 是否正在篩選模式
-    var currentFilter = 'all'; // 當前篩選類別
-
-    // 篩選功能
-    $('#filterOptions li a').click(function () {
-      // 獲取點擊項目的類別
-      var ourClass = $(this).attr('class');
-
-      // 重置所有按鈕的active類別
-      $('#filterOptions li').removeClass('active');
-      // 更新點擊按鈕的active狀態
-      $(this).parent().addClass('active');
-
-      // 設置篩選模式
-      isFiltered = true;
-      currentFilter = ourClass;
-
-      if (ourClass == 'all') {
-        // 顯示所有項目
-        $('#ourHolder').children('div.work_wrap').show();
-        isFiltered = false;
-        currentFilter = 'all';
-      }
-      else {
-        // 隱藏所有不屬於ourClass的元素
-        $('#ourHolder').children('div:not(.' + ourClass + ')').hide();
-        // 顯示所有屬於ourClass的元素
-        $('#ourHolder').children('div.' + ourClass).show();
-      }
-      return false;
-    });
-
-    // 顯示所有作品
-    function showAllItems() {
-      var $workWraps = $('#ourHolder').children('div.work_wrap');
-      $workWraps.show();
-    }
-
-    // 初始化顯示所有作品
-    showAllItems();
-    $(window).scroll(function () {
-      // 檢查是否接近頁面底部
-      if ($(window).scrollTop() + $(window).height() >= $(document).height() - 200) {
-        loadMoreItems();
-      }
-    });
-  });
-</script>
-<script type="text/javascript">
-  $(document).ready(function () {
-    $('.filter_button').click(function () {
-      $('.filter_wrap').fadeToggle('fast');
-    });
-  });
-</script>
-<!--owlCarousel-->
-<script>
-  $('.owl-carousel').owlCarousel({
-    nav: true,
-    loop: true,
-    margin: 1,
-    lazyLoad: true,
-    stagePadding: 0,
-    responsive: {
-      0: {
-        items: 1
-      },
-      1000: {
-        items: 1.15
-      }
-    }
-  })
-</script>
 
 </html>
