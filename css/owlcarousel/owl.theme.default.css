@@ -15,14 +15,15 @@
 	opacity: 0.5;
 	cursor: default;
 }
-.owl-theme .owl-nav.disabled + .owl-dots {
+
+.owl-theme .owl-nav.disabled+.owl-dots {
 	margin-top: 0px;
 }
+
 .owl-theme .owl-dots .owl-dot {
 	display: inline-block;
-	zoom: 1;
- *display: inline;
 }
+
 .owl-theme .owl-dots .owl-dot span {
 	width: 4px;
 	height: 4px;
@@ -30,12 +31,16 @@
 	background: #b9b9b9;
 	display: block;
 	-webkit-backface-visibility: visible;
+	backface-visibility: visible;
 	transition: opacity 200ms ease;
 	border-radius: 3px;
 }
-.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
 	background: #000000;
 }
+
 .owl-carousel {
 	position: relative;
 	cursor: grab;
@@ -44,82 +49,94 @@
 .owl-prev {
 	left: 0;
 }
+
 .owl-next {
 	right: 0;
 }
 
-@media screen and (max-width: 999px) {
-.owl-theme .owl-nav [class*='owl-'] {
-	transition: all .4s;
-	background: url(../../img/icon_next.svg) no-repeat;
-	background-position: right -26px center;
-	background-size: 22px;
-	opacity: 0;
-	display: inline-block;
-	cursor: pointer;
-	border-radius: 0px;
-}
-.owl-theme .owl-nav [class*='owl-']:hover {
-	transition: all .4s;
-	opacity: 0;
-	text-decoration: none;
-}
-.owl-theme .owl-dots {
-	margin-top: 10px;
-	padding-right: 20px;
-	text-align: center;
-	-webkit-tap-highlight-color: transparent;
-}
-.owl-next {
-	position: absolute;
-	top: 0;
-	width: 0%;
-	height: 0%;
-}
-.owl-prev {
-	position: absolute;
-	top: 0;
-	width: 0%;
-	height: 0%;
-}
+/* 單欄版：寬度 <= 1024px 或 高度 <= 739px */
+@media screen and (max-width: 1024px),
+screen and (max-height: 739px) {
+	.owl-theme .owl-nav [class*='owl-'] {
+		transition: all .4s;
+		background: url(../../img/icon_next.svg) no-repeat;
+		background-position: right -26px center;
+		background-size: 22px;
+		opacity: 0;
+		display: inline-block;
+		cursor: pointer;
+		border-radius: 0px;
+	}
+
+	.owl-theme .owl-nav [class*='owl-']:hover {
+		transition: all .4s;
+		opacity: 0;
+		text-decoration: none;
+	}
+
+	.owl-theme .owl-dots {
+		margin-top: 10px;
+		padding-right: 20px;
+		text-align: center;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	.owl-next {
+		position: absolute;
+		top: 0;
+		width: 0%;
+		height: 0%;
+	}
+
+	.owl-prev {
+		position: absolute;
+		top: 0;
+		width: 0%;
+		height: 0%;
+	}
 }
 
-@media screen and (min-width: 1000px) {
-.owl-theme .owl-nav [class*='owl-'] {
-	transition: all .4s;
-	background: url(../../img/icon_next.svg) no-repeat;
-	background-position: center center;
-	opacity: 0.25;
-	display: inline-block;
-	cursor: pointer;
-	border-radius: 30px;
-	background-color: rgba(255,255,255,.9);
-}
-.owl-theme .owl-nav [class*='owl-']:hover {
-	transition: all .4s;
-	opacity: 1;
-}
-.owl-theme .owl-dots {
-	margin-top: 10px;
-	padding-right: 20px;
-	text-align: right;
-	float: right;
-	width: fit-content;
-	-webkit-tap-highlight-color: transparent;
-}
-.owl-next {
-	position: absolute;
-	top: 50%;
-	right: 30px;
-	margin-top: -30px;
-	width: 60px;
-	height: 60px;
-	border-radius: 60px;
-}
-.owl-prev {
-	position: absolute;
-	top: 0;
-	width: 0%;
-	height: 0%;
-}
+/* 桌機雙欄版：寬度 >= 1025px 且 高度 >= 740px */
+@media screen and (min-width: 1025px) and (min-height: 740px) {
+	.owl-theme .owl-nav [class*='owl-'] {
+		transition: all .4s;
+		background: url(../../img/icon_next.svg) no-repeat;
+		background-position: center center;
+		opacity: 0.25;
+		display: inline-block;
+		cursor: pointer;
+		border-radius: 30px;
+		background-color: rgba(255, 255, 255, .9);
+	}
+
+	.owl-theme .owl-nav [class*='owl-']:hover {
+		transition: all .4s;
+		opacity: 1;
+	}
+
+	.owl-theme .owl-dots {
+		margin-top: 10px;
+		padding-right: 20px;
+		text-align: right;
+		float: right;
+		width: fit-content;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	.owl-next {
+		position: absolute;
+		top: 50%;
+		right: 30px;
+		margin-top: -30px;
+		width: 60px;
+		height: 60px;
+		border-radius: 60px;
+	}
+
+	.owl-prev {
+		position: absolute;
+		top: 0;
+		width: 0%;
+		height: 0%;
+	}
 }

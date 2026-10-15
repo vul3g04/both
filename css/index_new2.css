@@ -46,7 +46,7 @@ a:hover {
 	float: right;
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1025px) and (min-height: 740px) {
 	.filter_wrap {
 		width: 70vw;
 		margin-bottom: 42px;
@@ -58,7 +58,8 @@ a:hover {
 	}
 }
 
-@media screen and (min-width: 600px) and (max-width: 999px) {
+@media screen and (min-width: 600px) and (max-width: 1024px),
+screen and (min-width: 600px) and (max-height: 739px) {
 	.filter_wrap {
 		width: 90vw;
 		margin-bottom: 20px;
@@ -146,8 +147,9 @@ a:hover {
 	background: url(../img/logo_3_xs.svg) no-repeat;
 }
 
-/* Mobile & Tablet (< 999px) */
-@media screen and (max-width: 999px) {
+/* 單欄版：寬度 <= 1024px 或 高度 <= 739px */
+@media screen and (max-width: 1024px),
+screen and (max-height: 739px) {
 	h3 {
 		font-family: "Both";
 		font-size: calc(40px + 3vw);
@@ -341,7 +343,8 @@ a:hover {
 	}
 }
 
-@media screen and (min-width: 481px) and (max-width: 999px) {
+@media screen and (min-width: 481px) and (max-width: 1024px),
+screen and (min-width: 481px) and (max-height: 739px) {
 	.service_title {
 		font-family: 'Roboto', sans-serif;
 		font-weight: 600;
@@ -376,8 +379,8 @@ a:hover {
 	}
 }
 
-/* Desktop (>= 1000px) */
-@media screen and (min-width: 1000px) {
+/* 桌機雙欄版：寬度 >= 1025px 且 高度 >= 740px */
+@media screen and (min-width: 1025px) and (min-height: 740px) {
 	#ourHolder .owl-carousel {
 		width: 70vw;
 	}

@@ -30,10 +30,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/index_new2.css?v=20261014">
+  <link rel="stylesheet" href="css/index_new2.css?v=20261015">
   <link rel="stylesheet" href="css/lightbox-loading.css">
   <link rel="stylesheet" href="css/owlcarousel/owl.carousel.css">
-  <link rel="stylesheet" href="css/owlcarousel/owl.theme.default.css">
+  <link rel="stylesheet" href="css/owlcarousel/owl.theme.default.css?v=20261015">
 
   <!-- 結構化資料 -->
   <script type="application/ld+json">
@@ -1698,8 +1698,14 @@
       var isAnimating = false;   // 防止淡入淡出期間重複觸發
       var $allWorks = $('#ourHolder').children('div.work_wrap');
 
+      // 判斷當前視窗是否符合「桌機雙欄版」條件 (寬 >= 1025px 且 高 >= 740px)
+      function getDesktopItemsCount() {
+        return (window.innerWidth >= 1025 && window.innerHeight >= 740) ? 1.15 : 1;
+      }
+
       // 封裝：只針對尚未初始化的區塊啟動 Owl Carousel，並將克隆節點設為 aria-hidden
       function initCarousel($wrappers) {
+        var desktopItems = getDesktopItemsCount();
         $wrappers.each(function () {
           var $carousel = $(this).find('.owl-carousel');
           if (!$carousel.hasClass('owl-loaded')) {
@@ -1715,16 +1721,31 @@
                 0: {
                   items: 1
                 },
-                1000: {
-                  items: 1.15
+                1025: {
+                  items: desktopItems
                 }
               }
             });
           } else {
+            // 若視窗大小或高度跨越 740px 門檻，動態更新顯示張數並重整
+            var owlData = $carousel.data('owl.carousel');
+            if (owlData && owlData.options.responsive[1025]) {
+              owlData.options.responsive[1025].items = desktopItems;
+            }
             $carousel.trigger('refresh.owl.carousel');
           }
         });
       }
+
+      // 當視窗縮放或平板旋轉跨越 740px 高度門檻時，同步更新已載入的輪播張數
+      var lastDesktopState = getDesktopItemsCount();
+      $(window).on('resize orientationchange', function () {
+        var currentDesktopState = getDesktopItemsCount();
+        if (currentDesktopState !== lastDesktopState) {
+          lastDesktopState = currentDesktopState;
+          initCarousel($allWorks.filter(':visible'));
+        }
+      });
 
       // 1. 首次載入：只顯示並初始化前 6 個 project
       $allWorks.hide();
@@ -1755,11 +1776,24 @@
         }
       }
 
-      // 監聽視窗滾動事件
+      // 監聽視窗滾動事件（以目前最後一個顯示的作品底部為基準，並提早觸發）
+      var scrollOffset = 800; // 提早觸發的距離 (px)，數值越大越早載入下一批
+
       $(window).on('scroll', function () {
-        if (!isFiltered && visibleCount < $allWorks.length) {
-          if ($(window).scrollTop() + $(window).height() >= $(document).height() - 300) {
-            loadMoreItems();
+        if (!isFiltered && !isAnimating && visibleCount < $allWorks.length) {
+          // 抓出目前已顯示的最後一個作品（例如第 6、12、18 個）
+          var $lastVisibleWork = $allWorks.eq(visibleCount - 1);
+
+          if ($lastVisibleWork.length && $lastVisibleWork.is(':visible')) {
+            // 計算該作品的底部絕對座標
+            var workBottom = $lastVisibleWork.offset().top + $lastVisibleWork.outerHeight();
+            // 計算目前視窗底緣的座標
+            var viewportBottom = $(window).scrollTop() + $(window).height();
+
+            // 當視窗底緣接近最後一個作品底部（扣除 scrollOffset）時，立即載入下一批
+            if (viewportBottom >= workBottom - scrollOffset) {
+              loadMoreItems();
+            }
           }
         }
       });
